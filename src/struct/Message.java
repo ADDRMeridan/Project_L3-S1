@@ -1,64 +1,43 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package struct;
 
-import java.io.Serializable;
+/**
+ * 
+ * @author Mael “ADDRMeridan” MOULIN
+ * @author matthieulenoir
+ */
+
 import java.time.OffsetDateTime;
 
-public class Message implements Serializable, Comparable<Message> {
+public class Message {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private int idTicket;
-	private int idMessage;
-	private String author;
+        private int idGroupe;
+        private int idTicket;
 	private String mess;
 	private OffsetDateTime tWritten;
 	
-	public Message(int idTicket, String username, String message) {
-		this.idTicket = idTicket;
-		this.setIdMessage(-1);
-		this.author = username;
+	public Message(String message) {
 		this.mess = message;
 		this.tWritten = OffsetDateTime.now();
 	}
 
-	public int getIdTicket() {
-		return idTicket;
-	}
+        public int getIdTicket() {
+                return idTicket;
+        }
+        
+        public int getIdGroupe() {
+            return idGroupe;
+        }
 
 	public String getMessage() {
 		return mess;
 	}
 
-	public OffsetDateTime getTWritten() {
+	public OffsetDateTime gettWritten() {
 		return tWritten;
-	}
-	
-	public String getAuthor() {
-		return author;
-	}
-
-	@Override
-	public int compareTo(Message obj) {
-		return this.getTWritten().compareTo(obj.getTWritten());
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		
-		if(o instanceof Message) {
-			Message tmp = (Message) o;
-			return (this.idTicket == tmp.idTicket);
-		}
-		return false;
-	}
-
-	public int getIdMessage() {
-		return idMessage;
-	}
-
-	public void setIdMessage(int idMessage) {
-		this.idMessage = idMessage;
 	}
 }

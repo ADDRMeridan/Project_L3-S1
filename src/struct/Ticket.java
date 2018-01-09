@@ -1,90 +1,63 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package struct;
 
-import java.io.Serializable;
-import java.time.OffsetDateTime;
-import java.util.Set;
-import java.util.TreeSet;
+/**
+ *
+ * @author matthieulenoir
+ */
+import java.util.List;
 
-public class Ticket implements Serializable, Comparable<Ticket>{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Ticket {
+        
+        private int idGroupe;
 	private String title;
-	private int idTicket;
-	private int idGroup;
+	private int id;
 	private Message firstMess;
-	private TreeSet<Message> messages;
-	private OffsetDateTime tLastMessage;
+	private List<Message> messages;
 	
-	public Ticket(String title, int idGroup, Message firstMess) {
+	public Ticket(String title, int id, String firstMess, Message ...messages) {
 		
 		this.title = title;
-		this.idTicket = -1;
-		this.firstMess = firstMess;
-		messages = new TreeSet<>();
+		this.id = id;
+		this.firstMess = new Message(firstMess);
+		for (Message e : messages) {
+			this.messages.add(e);
+		}
 	}
 	
 	public Ticket(String title, int id, Message firstMess, Message ...messages) {
 		
 		this.title = title;
-		this.idTicket = id;
+		this.id = id;
 		this.firstMess = firstMess;
-		this.messages = new TreeSet<>();
 		for (Message e : messages) {
 			this.messages.add(e);
 		}
 	}
 
+        public int getIdGroupe() {
+                return idGroupe;
+        }
+
 	public String getTitle() {
 		return title;
 	}
 
-	public int getIdTicket() {
-		return idTicket;
-	}
-
-	public void setId(int id) {
-		this.idTicket = id;
+	public int getId() {
+		return id;
 	}
 
 	public Message getFirstMess() {
 		return firstMess;
 	}
 
-	public Set<Message> getMessages() {
+	public List<Message> getMessages() {
 		return messages;
 	}
 	
-	public void addMessage(Message mess) {
-		
-		messages.add(mess);
-		tLastMessage = OffsetDateTime.now();
-	}
-
-	public OffsetDateTime gettLastMessage() {
-		return tLastMessage;
-	}
 	
-	@Override
-	public int compareTo(Ticket o) {
-		return this.tLastMessage.compareTo(o.gettLastMessage());
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		
-		if(o instanceof Ticket) {
-			Ticket tmp = (Ticket) o;
-			return (this.idTicket == tmp.idTicket);
-		}
-		return false;
-	}
-
-	public int getIdGroup() {
-		return idGroup;
-	}
-
 }
- 
