@@ -42,7 +42,7 @@ CREATE TABLE `message` (
 
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE `utilisateur` (
-  `uti_id` int(11) NOT NULL,
+  `uti_id` varchar(45) NOT NULL,
   `uti_nom` varchar(45) NOT NULL,
   `uti_prenom` varchar(45) NOT NULL,
   `uti_password` varchar(45) NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE `utilisateur` (
 
 DROP TABLE IF EXISTS `utilisateur_has_groupe`;
 CREATE TABLE `utilisateur_has_groupe` (
-  `utilisateur_uti_id` int(11) NOT NULL,
+  `utilisateur_uti_id` varchar(45) NOT NULL,
   `groupe_grp_id` int(11) NOT NULL,
   PRIMARY KEY (`utilisateur_uti_id`,`groupe_grp_id`),
   KEY `fk_utilisateur_has_groupe_groupe1_idx` (`groupe_grp_id`),
