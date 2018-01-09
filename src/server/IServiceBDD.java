@@ -21,11 +21,13 @@ public interface IServiceBDD {
     public boolean authentification(String idUtilisateur,String motDePasse);
     /**
      * Permet de génerer un idFil unique
+     * @param idGrp l'id du groupe auquel appartiendra le fil
      * @return l'idFil généré
      */
     public int nextIdFil (int idGrp);
     /**
      * Permet de génerer un idMsg unique
+     * @param  idFil l'id du fil auquel appartiendra le message
      * @return l'idMsg généré
      */
     public int nextIdMsg(int idFil);
