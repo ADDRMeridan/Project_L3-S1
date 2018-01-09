@@ -126,14 +126,10 @@ public class ModifierUtilisateurFrame1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int idUtilisateur=0;
-        Boolean idOK=true;
-        try{
-            idUtilisateur=Integer.parseInt(jTextField3.getText());
-        }catch(java.lang.NumberFormatException e){
-            idOK=false;
-            jTextField3.setText("Id Utilisateur est un entier");
-        }
+        String idUtilisateur;
+        boolean idOK=true;
+        idUtilisateur=jTextField3.getText();
+
         if(idOK){ 
             try{
                 Class.forName("com.mysql.jdbc.Driver");
@@ -142,7 +138,8 @@ public class ModifierUtilisateurFrame1 extends javax.swing.JFrame {
                 String passwd ="root";
                 Connection conn= DriverManager.getConnection(url,user,passwd);
                 Statement state= conn.createStatement();
-                ResultSet result = state.executeQuery("SELECT * FROM utilisateur WHERE uti_id="+idUtilisateur+"");
+                String idUtilisateurBis="'"+idUtilisateur+"'";
+                ResultSet result = state.executeQuery("SELECT * FROM utilisateur WHERE uti_id="+idUtilisateurBis+"");
                 if(!result.next()){
                     jTextField3.setText("Id utilisateur inexistant");
                     idOK=false;

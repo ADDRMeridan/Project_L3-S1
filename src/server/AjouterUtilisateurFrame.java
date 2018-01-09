@@ -135,14 +135,14 @@ public class AjouterUtilisateurFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int idUtilisateur=0;
+        String idUtilisateur="";
         Boolean idOK=true;
-        Serveur serv=new Serveur();
+        GestionBDD serv=new GestionBDD();
         try{
-            idUtilisateur=Integer.parseInt(jTextField1.getText());
-        }catch(java.lang.NumberFormatException e){
+            idUtilisateur=jTextField1.getText();
+        }catch(Exception e){
             idOK=false;
-            jTextField1.setText("Id Utilisateur est un entier");
+            e.printStackTrace();
         }
         if(idOK){
             if(serv.ajouterUtilisateur(idUtilisateur,jTextField3.getText(), jTextField2.getText(), jTextField4.getText())){

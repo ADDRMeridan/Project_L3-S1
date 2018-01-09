@@ -16,12 +16,12 @@ import java.sql.Statement;
  * @author matthieulenoir
  */
 public class ModifierUtilisateurFrame2 extends javax.swing.JFrame {
-    private int idUtilisateur;
+    private String idUtilisateur;
     /**
      * Creates new form AjouterUtilisateurFrame
      * @param idUtilisateur l'id de l'utilisateur à modifier
      */
-    public ModifierUtilisateurFrame2(int idUtilisateur) {
+    public ModifierUtilisateurFrame2(String idUtilisateur) {
         initComponents();
         this.idUtilisateur=idUtilisateur;
         jTextField1.setText(""+idUtilisateur+"");
@@ -32,6 +32,7 @@ public class ModifierUtilisateurFrame2 extends javax.swing.JFrame {
             String passwd ="root";
             Connection conn= DriverManager.getConnection(url,user,passwd);
             Statement state= conn.createStatement();
+            idUtilisateur="'"+idUtilisateur+"'";
             ResultSet result = state.executeQuery("SELECT * FROM utilisateur WHERE uti_id="+idUtilisateur+"");
             result.next();
             jTextField3.setText(""+result.getObject(2).toString()+"");
@@ -161,7 +162,7 @@ public class ModifierUtilisateurFrame2 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Serveur serv=new Serveur();
+        GestionBDD serv=new GestionBDD();
         if(serv.modifierUtilisateur(idUtilisateur, jTextField3.getText(), jTextField2.getText(), jTextField4.getText())){
             this.setVisible(false);
             new JFrameServeur().setVisible(true);
