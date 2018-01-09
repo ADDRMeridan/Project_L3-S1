@@ -18,17 +18,19 @@ public interface IServiceBDD {
      * @param motDePasse le mot de passe de l'utilisateur 
      * @return boléen indiquant le succés ou non de l'authentification 
      */
-    public boolean authentification(int idUtilisateur,String motDePasse);
+    public boolean authentification(String idUtilisateur,String motDePasse);
     /**
      * Permet de génerer un idFil unique
+     * @param idGrp l'id du groupe auquel appartiendra le fil
      * @return l'idFil généré
      */
-    public int nextIdFil ();
+    public int nextIdFil (int idGrp);
     /**
      * Permet de génerer un idMsg unique
+     * @param  idFil l'id du fil auquel appartiendra le message
      * @return l'idMsg généré
      */
-    public int nextIdMsg();
+    public int nextIdMsg(int idFil);
     /**
      * Permet d'ajouter un fil de discussion dans la base de donnée
      * @param idFil l'indentifiant unique de ce fil de discussion
@@ -64,11 +66,17 @@ public interface IServiceBDD {
      * @param idUti l'identifiant unique de cet utilisateur
      * @return la liste des groupes auxquels appartient cet utilisateur
      */
-    public List <Groupe> getListeGroupe(int idUti);
+    public List <Groupe> getListeGroupe(String idUti);
+    /**
+     * Retourne la liste des tickets auxquels appartient un utilisateur présent dans la base de donnée
+     * @param idUti l'identifiant unique de cet utilisateur
+     * @return la liste des tickets auxquels appartient cet utilisateur
+     */
+    public List <Ticket> getListeTicket(String idUti);
     /**
      * Indique si un utilisateur est présent dans la base de donnée
      * @param idUti l'indentifiant unique de l'utilisateur 
      * @return un booléen indiquant ou non la présence de l'utilisateur dans la base de donnée
      */
-    public boolean utilisateurExiste(int idUti);
+    public boolean utilisateurExiste(String idUti);
 }

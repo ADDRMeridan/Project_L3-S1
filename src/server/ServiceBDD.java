@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
  */
 public class ServiceBDD implements IServiceBDD{
     @Override
-    public boolean authentification(int idUtilisateur,String motDePasse){
+    public boolean authentification(String idUtilisateur,String motDePasse){
         boolean authOK;
         try{
             Class.forName("com.mysql.jdbc.Driver");
@@ -27,6 +27,7 @@ public class ServiceBDD implements IServiceBDD{
             String passwd ="root";
             Connection conn= DriverManager.getConnection(url,user,passwd);
             Statement state= conn.createStatement();
+            idUtilisateur="'"+idUtilisateur+"'";
             motDePasse="'"+motDePasse+"'";
             ResultSet result = state.executeQuery("SELECT * FROM utilisateur WHERE uti_id="+idUtilisateur+" AND uti_password="+motDePasse+"");
             authOK=result.next();
@@ -41,6 +42,10 @@ public class ServiceBDD implements IServiceBDD{
     @Override
     public int nextIdFil (){
         int nextID=0;
+        int nbFil=nbFil();
+        if(nbFil==0){
+            return nextID;
+        }
         try{
             Class.forName("com.mysql.jdbc.Driver");
             String url= "jdbc:mysql://localhost:8889/mydb";
@@ -49,13 +54,35 @@ public class ServiceBDD implements IServiceBDD{
             Connection conn= DriverManager.getConnection(url,user,passwd);
             Statement state= conn.createStatement();
             ResultSet result = state.executeQuery("SELECT * FROM fil_de_discussion");
-            while(result.next()) nextID++;
+            for(int i=0;i<nbFil;i++){
+                result.next();
+            }
+            nextID=Integer.parseInt(result.getObject(1).toString())+1;
             result.close();
             state.close();
             return nextID;
             }catch(Exception e){
                 e.printStackTrace();
                 return nextID;
+            }
+    }
+    public int nbFil (){
+        int nbFil=0;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            String url= "jdbc:mysql://localhost:8889/mydb";
+            String user="root";
+            String passwd ="root";
+            Connection conn= DriverManager.getConnection(url,user,passwd);
+            Statement state= conn.createStatement();
+            ResultSet result = state.executeQuery("SELECT * FROM fil_de_discussion");
+            while(result.next()) nbFil++;
+            result.close();
+            state.close();
+            return nbFil;
+            }catch(Exception e){
+                e.printStackTrace();
+                return nbFil;
             }
     }
     @Override

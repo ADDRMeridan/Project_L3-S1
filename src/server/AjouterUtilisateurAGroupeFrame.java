@@ -137,14 +137,13 @@ public class AjouterUtilisateurAGroupeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int idUtilisateur=0;
+        String idUtilisateur="";
         Boolean idOK=true;
-        Serveur serv=new Serveur();
+        GestionBDD serv=new GestionBDD();
         try{
-            idUtilisateur=Integer.parseInt(jTextField3.getText());
-        }catch(java.lang.NumberFormatException e){
-            idOK=false;
-            jTextField3.setText("Id Utilisateur est un entier");
+            idUtilisateur=jTextField3.getText();
+        }catch(Exception e){
+            e.printStackTrace();
         }
         if(idOK){ 
             try{
@@ -154,6 +153,7 @@ public class AjouterUtilisateurAGroupeFrame extends javax.swing.JFrame {
                 String passwd ="root";
                 Connection conn= DriverManager.getConnection(url,user,passwd);
                 Statement state= conn.createStatement();
+                idUtilisateur="'"+idUtilisateur+"'";
                 ResultSet result = state.executeQuery("SELECT * FROM utilisateur WHERE uti_id="+idUtilisateur+"");
                 if(!result.next()){
                     jTextField3.setText("Id utilisateur inexistant");
