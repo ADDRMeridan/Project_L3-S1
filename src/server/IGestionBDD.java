@@ -9,7 +9,7 @@
  * @author matthieulenoir
  *
  */
-public interface IServeur {
+public interface IGestionBDD {
 	/**
 	 * Crée et ajoute un utilisateur à la base de donnée
 	 * @param idUtilisateur l'identifiant unique de cet utilisateur

@@ -14,7 +14,7 @@ import java.sql.ResultSetMetaData;
  *
  * @author matthieulenoir
  */
-public class Serveur implements IServeur{
+public class GestionBDD implements IGestionBDD{
     @Override
     public boolean ajouterUtilisateur(int idUtilisateur,String nom,String prenom,String password){
         try{
@@ -146,44 +146,4 @@ public class Serveur implements IServeur{
         }
            return true;
     }
-    /*try{
-        Class.forName("com.mysql.jdbc.Driver");
-        String url= "jdbc:mysql://localhost:8889/mydb";
-        String user="root";
-        String passwd ="root";
-        Connection conn= DriverManager.getConnection(url,user,passwd);
-        
-        
-        Statement state= conn.createStatement();
-        ResultSet result = state.executeQuery("SELECT * FROM fil_de_discussion");
-        ResultSetMetaData resultMeta = result.getMetaData();
-        System.out.println("\n*****************************");
-        for(int i=1;i<=resultMeta.getColumnCount();i++)
-            System.out.print("\t"+ resultMeta.getColumnName(i).toUpperCase()+"\t *");
-        System.out.println("\n******************************");
-        
-        
-        while(result.next()){
-            for(int i=1;i<=resultMeta.getColumnCount();i++)
-                System.out.print("\t"+result.getObject(i).toString()+"\t |");
-            System.out.println("\n**************************");
-        }
-        result = state.executeQuery("SELECT * FROM message");
-        resultMeta = result.getMetaData();
-        System.out.println("\n*****************************");
-        for(int i=1;i<=resultMeta.getColumnCount();i++)
-            System.out.print("\t"+ resultMeta.getColumnName(i).toUpperCase()+"\t *");
-        System.out.println("\n******************************");
-        
-        
-        while(result.next()){
-            for(int i=1;i<=resultMeta.getColumnCount();i++)
-                System.out.print("\t"+result.getObject(i).toString()+"\t |");
-            System.out.println("\n**************************");
-        }
-        result.close();
-        state.close();
-    }catch(Exception e){
-        e.printStackTrace();
-    }*/
 }
