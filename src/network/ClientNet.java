@@ -16,6 +16,7 @@ public class ClientNet {
 	static final int SERVERPORT = 9000;
 	static final String SERVERIP = "127.0.0.1";
 	
+	private String username = "";
 	private Socket socket;
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
@@ -23,18 +24,22 @@ public class ClientNet {
 	public ClientNet() throws IOException {
 	
 		socket = new Socket(InetAddress.getByName(SERVERIP), SERVERPORT);
-		input = new ObjectInputStream(socket.getInputStream());
 		output = new ObjectOutputStream(socket.getOutputStream());
+		input = new ObjectInputStream(socket.getInputStream());
 	}
 	
 	public boolean connect(String username, String password) throws IOException, ClassNotFoundException {
 		
-		Utilisateur tmp = new Utilisateur(-1, username, password, "", "");
-		NetPackage pack = new NetPackage(ObjectType.LOGIN, tmp);
+		Utilisateur user = new Utilisateur(username, password, "", "");
+		NetPackage pack = new NetPackage(ObjectType.LOGIN, user);
 		output.writeObject(pack);
 		pack = (NetPackage) input.readObject();
 		if(pack.getObjType() == ObjectType.LOGIN_ANS) {
-			return (Boolean) pack.getObj();
+			Boolean tmp = (Boolean) pack.getObj();
+			if(tmp) {
+				this.username = username;
+			}
+			return tmp;
 		}
 		return false;
 	}
@@ -53,16 +58,16 @@ public class ClientNet {
 		output.close();
 	}
 	
-	public void createTicket(String title, String firstMess) throws IOException {
+	public void createTicket(String title, int idGroup, String firstMess) throws IOException {
 		
-		Ticket tick = new Ticket(title, new Message(-1, firstMess));
+		Ticket tick = new Ticket(title, idGroup, new Message(-1, this.getUsername(), firstMess));
 		NetPackage pack = new NetPackage(ObjectType.NEW_TICKET, tick);
 		output.writeObject(pack);
 	}
 	
 	public void answerTicket(int idTicket, String mess) throws IOException {
 		
-		Message tmp = new Message(idTicket, mess);
+		Message tmp = new Message(idTicket, this.username, mess);
 		NetPackage pack = new NetPackage(ObjectType.NEW_MESSAGE, tmp);
 		output.writeObject(pack);
 	}
@@ -78,4 +83,9 @@ public class ClientNet {
 		}
 		return null;
 	}
+
+	public String getUsername() {
+		return username;
+	}
+	
 }

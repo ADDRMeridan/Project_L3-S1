@@ -1,7 +1,10 @@
 package network;
 
-public class NetPackage {
+import java.io.Serializable;
 
+public class NetPackage implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private ObjectType objType;
 	private Object obj;
 	
