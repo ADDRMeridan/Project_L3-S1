@@ -27,10 +27,11 @@ public interface IServiceBDD {
     public int nextIdFil (int idGrp);
     /**
      * Permet de génerer un idMsg unique
+     * @param idGrp
      * @param  idFil l'id du fil auquel appartiendra le message
      * @return l'idMsg généré
      */
-    public int nextIdMsg(int idFil);
+    public int nextIdMsg(int idFil,int idGrp);
     /**
      * Permet d'ajouter un fil de discussion dans la base de donnée
      * @param idFil l'indentifiant unique de ce fil de discussion
@@ -46,9 +47,10 @@ public interface IServiceBDD {
      * @param idMsg l'indentifiant unique de ce message
      * @param contenuMsg    le contenu de ce message 
      * @param idFil l'indentifiant du fil auquel appartient ce message
+     * @param idGrp
      * @return un booléen idiquant la réussite de création du message
      */
-    public boolean ajouterMsg(int idMsg,String contenuMsg,int idFil);
+    public boolean ajouterMsg(int idMsg,String contenuMsg,int idFil,int idGrp);
     /**
     * Retourne la liste des messages d'un ticket présent dans la base de donnée
     * @param idFil l'identifiant unique de ce fil
