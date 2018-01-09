@@ -23,12 +23,12 @@ public interface IServiceBDD {
      * Permet de génerer un idFil unique
      * @return l'idFil généré
      */
-    public int nextIdFil ();
+    public int nextIdFil (int idGrp);
     /**
      * Permet de génerer un idMsg unique
      * @return l'idMsg généré
      */
-    public int nextIdMsg();
+    public int nextIdMsg(int idFil);
     /**
      * Permet d'ajouter un fil de discussion dans la base de donnée
      * @param idFil l'indentifiant unique de ce fil de discussion
