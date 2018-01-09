@@ -16,7 +16,7 @@ import java.sql.ResultSetMetaData;
  */
 public class GestionBDD implements IGestionBDD{
     @Override
-    public boolean ajouterUtilisateur(int idUtilisateur,String nom,String prenom,String password){
+    public boolean ajouterUtilisateur(String idUtilisateur,String nom,String prenom,String password){
         try{
             Class.forName("com.mysql.jdbc.Driver");
             String url= "jdbc:mysql://localhost:8889/mydb";
@@ -27,6 +27,7 @@ public class GestionBDD implements IGestionBDD{
             nom="'"+nom+"'";
             prenom="'"+prenom+"'";
             password="'"+password+"'";
+            idUtilisateur="'"+idUtilisateur+"'";
             state.executeUpdate("INSERT INTO utilisateur(uti_id, uti_nom, uti_prenom, uti_password) VALUES ("+idUtilisateur+","+nom+","+prenom+","+password+");");
             state.close();
         }catch(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e1){
@@ -40,7 +41,7 @@ public class GestionBDD implements IGestionBDD{
         return true;
     }
     @Override
-    public boolean supprimerUtilisateur(int idUtilisateur){
+    public boolean supprimerUtilisateur(String idUtilisateur){
         try{
             Class.forName("com.mysql.jdbc.Driver");
             String url= "jdbc:mysql://localhost:8889/mydb";
@@ -48,6 +49,7 @@ public class GestionBDD implements IGestionBDD{
             String passwd ="root";
             Connection conn= DriverManager.getConnection(url,user,passwd);
             Statement state= conn.createStatement();
+            idUtilisateur="'"+idUtilisateur+"'";
             state.executeUpdate("DELETE FROM utilisateur_has_groupe WHERE utilisateur_uti_id="+idUtilisateur+"");
             state.executeUpdate("DELETE FROM utilisateur WHERE uti_id="+idUtilisateur+"");
             state.close();
@@ -100,7 +102,7 @@ public class GestionBDD implements IGestionBDD{
         return true;
     }
     @Override
-    public boolean ajouterUtilisateurAGroupe(int idGroupe,int idUtilisateur){
+    public boolean ajouterUtilisateurAGroupe(int idGroupe,String idUtilisateur){
         try{
             Class.forName("com.mysql.jdbc.Driver");
             String url= "jdbc:mysql://localhost:8889/mydb";
@@ -108,6 +110,7 @@ public class GestionBDD implements IGestionBDD{
             String passwd ="root";
             Connection conn= DriverManager.getConnection(url,user,passwd);
             Statement state= conn.createStatement();
+            idUtilisateur="'"+idUtilisateur+"'";
             state.executeUpdate("INSERT INTO utilisateur_has_groupe (utilisateur_uti_id, groupe_grp_id) VALUES ("+idUtilisateur+","+idGroupe+");");
             state.close();
         }catch(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e1){
@@ -121,7 +124,7 @@ public class GestionBDD implements IGestionBDD{
         return true;
     }
     @Override
-    public boolean modifierUtilisateur(int idUtilisateur,String nom,String prenom,String password){
+    public boolean modifierUtilisateur(String idUtilisateur,String nom,String prenom,String password){
         try{
             Class.forName("com.mysql.jdbc.Driver");
             String url= "jdbc:mysql://localhost:8889/mydb";
@@ -132,6 +135,7 @@ public class GestionBDD implements IGestionBDD{
             nom="'"+nom+"'";
             prenom="'"+prenom+"'";
             password="'"+password+"'";
+            idUtilisateur="'"+idUtilisateur+"'";
             state.executeUpdate("UPDATE utilisateur SET uti_nom= "+nom+" WHERE uti_id="+idUtilisateur+";");
             state.executeUpdate("UPDATE utilisateur SET uti_prenom= "+prenom+" WHERE uti_id="+idUtilisateur+";");
             state.executeUpdate("UPDATE utilisateur SET uti_password= "+password+" WHERE uti_id="+idUtilisateur+";");

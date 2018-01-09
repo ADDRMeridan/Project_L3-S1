@@ -17,13 +17,13 @@ public interface IGestionBDD {
 	 * @param prenom le prenom de cet utilisateur
 	 * @param password le mot de passe de cet utilisateur
 	 * @return un booléen indiquant si la création et l'ajout de l'utilisateur ont fonctionné*/
-	public boolean ajouterUtilisateur(int idUtilisateur,String nom,String prenom,String password);
+	public boolean ajouterUtilisateur(String idUtilisateur,String nom,String prenom,String password);
 	/**
 	 * Supprime un utilisateur de la base de donnée
 	 * @param idUtilisateur l'identifiant unique de l'utilisateur que l'on souhaite supprimer
 	 * @return un booléen indiquant si la suppression a fonctionné
 	 * */
-	public boolean supprimerUtilisateur(int idUtilisateur);
+	public boolean supprimerUtilisateur(String idUtilisateur);
 	/**
 	 * Crée et ajoute un groupe à la base de donnée
 	 * @param idGroupe l'identifiant unique de ce groupe
@@ -43,7 +43,7 @@ public interface IGestionBDD {
 	 * @param idUtilisateur l'identifiant unique de cet utilisateur
 	 * @return booléen indiquant si l'ajout a fonctionné
 	 * */
-	public boolean ajouterUtilisateurAGroupe(int idGroupe,int idUtilisateur);
+	public boolean ajouterUtilisateurAGroupe(int idGroupe,String idUtilisateur);
 	/**
 	 * Modifie les données d'un utilisateur présent dans la base de donnée
 	 * @param idUtilisateur l'identifiant unique de cet utilisateur
@@ -52,6 +52,6 @@ public interface IGestionBDD {
 	 * @param password le mot de passe de cet utilisateur
 	 * @return booléen indiquant si la modification a fonctionné
 	 * */
-	public boolean modifierUtilisateur(int idUtilisateur,String nom,String prenom,String password);
+	public boolean modifierUtilisateur(String idUtilisateur,String nom,String prenom,String password);
 }
 
