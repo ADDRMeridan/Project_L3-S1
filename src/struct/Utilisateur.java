@@ -1,23 +1,21 @@
 package struct;
 
-public class Utilisateur {
+import java.io.Serializable;
 
-	private int id;
+public class Utilisateur implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private String username;
 	private String mdp;
 	private String nom;
 	private String prenom;
 
-	public Utilisateur(int id, String username, String mdp, String nom, String prenom) {
-		this.id = id;
+	public Utilisateur(String username, String mdp, String nom, String prenom) {
+		
 		this.username = username;
 		this.mdp = mdp;
 		this.nom = nom;
 		this.prenom = prenom;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public String getUsername() {
