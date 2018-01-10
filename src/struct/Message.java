@@ -11,20 +11,32 @@ package struct;
  * @author matthieulenoir
  */
 
-import java.time.OffsetDateTime;
+import java.util.Date;
 
 public class Message {
 
         private int idGroupe;
         private int idTicket;
+        private int id;
 	private String mess;
-	private OffsetDateTime tWritten;
+	private Date tWritten;
 	
 	public Message(String message) {
 		this.mess = message;
-		this.tWritten = OffsetDateTime.now();
+		this.tWritten = new Date();
 	}
-
+        
+        public Message(String message,Date date,int idGroupe,int idTicket,int id) {
+		this.mess = message;
+		this.tWritten = date;
+                this.idGroupe=idGroupe;
+                this.id=id;
+                this.idTicket=idTicket;
+	}
+        
+        public int getId(){
+            return id;
+        }
         public int getIdTicket() {
                 return idTicket;
         }
@@ -37,7 +49,7 @@ public class Message {
 		return mess;
 	}
 
-	public OffsetDateTime gettWritten() {
+	public Date gettWritten() {
 		return tWritten;
 	}
 }

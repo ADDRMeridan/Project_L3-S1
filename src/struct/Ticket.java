@@ -6,10 +6,11 @@
 package struct;
 
 /**
- *
+ * @author Mael “ADDRMeridan” MOULIN
  * @author matthieulenoir
  */
 import java.util.List;
+import java.util.Date;
 
 public class Ticket {
         
@@ -17,6 +18,7 @@ public class Ticket {
 	private String title;
 	private int id;
 	private Message firstMess;
+        private Date dateLastMess;
 	private List<Message> messages;
 	
 	public Ticket(String title, int id, String firstMess, Message ...messages) {
@@ -27,6 +29,8 @@ public class Ticket {
 		for (Message e : messages) {
 			this.messages.add(e);
 		}
+                this.dateLastMess= this.messages.get(this.messages.size()).gettWritten();
+
 	}
 	
 	public Ticket(String title, int id, Message firstMess, Message ...messages) {
@@ -37,8 +41,22 @@ public class Ticket {
 		for (Message e : messages) {
 			this.messages.add(e);
 		}
+                this.dateLastMess= this.messages.get(this.messages.size()).gettWritten();
+	}
+        
+	public Ticket(String title, int id, Message firstMess,Date date,int idGroupe) {
+		
+		this.title = title;
+		this.id = id;
+		this.firstMess = firstMess;
+                this.dateLastMess= date;
+                this.idGroupe=idGroupe;
 	}
 
+        public Date getDateLastMess() {
+           return dateLastMess;
+         }
+  
         public int getIdGroupe() {
                 return idGroupe;
         }
