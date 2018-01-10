@@ -7,6 +7,8 @@ import struct.Message;
 import struct.Ticket;
 import struct.Groupe;
 import java.util.List;
+import java.util.Date;
+
 /**
  *
  * @author matthieulenoir
@@ -27,7 +29,7 @@ public interface IServiceBDD {
     public int nextIdFil (int idGrp);
     /**
      * Permet de génerer un idMsg unique
-     * @param idGrp
+     * @param idGrp l'id du groupe auquel appartiendra le message
      * @param  idFil l'id du fil auquel appartiendra le message
      * @return l'idMsg généré
      */
@@ -39,24 +41,27 @@ public interface IServiceBDD {
      * @param idGrp l'identifiant unique du groupe auquel appartient ce fil
      * @param idMsg l'identifiant unique du premier message de ce fil
      * @param contenuMsg le contenu du premier message de ce fil
+     * @param date la date du premier message
      * @return un boléen indiquant la réussite de la création du fil
      */
-    public boolean ajouterFil(int idFil,String nom,int idGrp,int idMsg,String contenuMsg);
+    public boolean ajouterFil(int idFil,String nom,int idGrp,int idMsg,String contenuMsg,Date date);
     /**
      * Permet d'ajouter un message à un fil de discussion dans la base de donnée
      * @param idMsg l'indentifiant unique de ce message
      * @param contenuMsg    le contenu de ce message 
      * @param idFil l'indentifiant du fil auquel appartient ce message
-     * @param idGrp
+     * @param idGrp l'indentifiant du groupe auquel appartient ce message
+     * @param date la date de ce message
      * @return un booléen idiquant la réussite de création du message
      */
-    public boolean ajouterMsg(int idMsg,String contenuMsg,int idFil,int idGrp);
+    public boolean ajouterMsg(int idMsg,String contenuMsg,int idFil,int idGrp,Date date);
     /**
     * Retourne la liste des messages d'un ticket présent dans la base de donnée
     * @param idFil l'identifiant unique de ce fil
+    * @param idGrp l'identifiant du groupe auquel appartient ce fil
     * @return la liste des messages de ce fil
     */
-    public List <Message> getListeMessage(int idFil);
+    public List <Message> getListeMessage(int idFil,int idGrp);
     /**
      * Retourne la liste des tickets appartenant à un groupe présent dans la base de donnée
      * @param idGrp l'identifiant unique de ce groupe
