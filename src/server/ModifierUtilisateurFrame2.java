@@ -2,7 +2,6 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
 /*
@@ -33,7 +32,7 @@ public class ModifierUtilisateurFrame2 extends javax.swing.JFrame {
             Connection conn= DriverManager.getConnection(url,user,passwd);
             Statement state= conn.createStatement();
             idUtilisateur="'"+idUtilisateur+"'";
-            ResultSet result = state.executeQuery("SELECT * FROM utilisateur WHERE uti_id="+idUtilisateur+"");
+            ResultSet result = state.executeQuery("SELECT * FROM utilisateur WHERE uti_id="+idUtilisateur+" LIMIT 1");
             result.next();
             jTextField3.setText(""+result.getObject(2).toString()+"");
             jTextField2.setText(""+result.getObject(3).toString()+"");

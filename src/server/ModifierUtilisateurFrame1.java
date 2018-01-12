@@ -2,7 +2,6 @@ import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 /*
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -139,7 +138,7 @@ public class ModifierUtilisateurFrame1 extends javax.swing.JFrame {
                 Connection conn= DriverManager.getConnection(url,user,passwd);
                 Statement state= conn.createStatement();
                 String idUtilisateurBis="'"+idUtilisateur+"'";
-                ResultSet result = state.executeQuery("SELECT * FROM utilisateur WHERE uti_id="+idUtilisateurBis+"");
+                ResultSet result = state.executeQuery("SELECT * FROM utilisateur WHERE uti_id="+idUtilisateurBis+" LIMIT 1");
                 if(!result.next()){
                     jTextField3.setText("Id utilisateur inexistant");
                     idOK=false;

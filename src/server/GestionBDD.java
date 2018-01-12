@@ -2,8 +2,7 @@
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.Statement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -51,6 +50,7 @@ public class GestionBDD implements IGestionBDD{
             Statement state= conn.createStatement();
             idUtilisateur="'"+idUtilisateur+"'";
             state.executeUpdate("DELETE FROM utilisateur_has_groupe WHERE utilisateur_uti_id="+idUtilisateur+"");
+            state.executeUpdate("DELETE FROM utilisateur_has_unread_ticket WHERE utilisateur_uti_id="+idUtilisateur+"");
             state.executeUpdate("DELETE FROM utilisateur WHERE uti_id="+idUtilisateur+"");
             state.close();
         }catch(Exception e){
@@ -110,7 +110,6 @@ public class GestionBDD implements IGestionBDD{
             String passwd ="root";
             Connection conn= DriverManager.getConnection(url,user,passwd);
             Statement state= conn.createStatement();
-            idUtilisateur="'"+idUtilisateur+"'";
             state.executeUpdate("INSERT INTO utilisateur_has_groupe (utilisateur_uti_id, groupe_grp_id) VALUES ("+idUtilisateur+","+idGroupe+");");
             state.close();
         }catch(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e1){
