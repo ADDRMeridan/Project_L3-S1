@@ -61,5 +61,19 @@ CREATE TABLE `utilisateur_has_groupe` (
   CONSTRAINT `fk_utilisateur_has_groupe_utilisateur` FOREIGN KEY (`utilisateur_uti_id`) REFERENCES `utilisateur` (`uti_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `utilisateur_has_unread_ticket`;
+CREATE TABLE `utilisateur_has_unread_ticket` (
+  `utilisateur_uti_id` varchar(45) NOT NULL,
+  `fil_de_discussion_fil_id` int(11) NOT NULL,
+  `fil_de_discussion_groupe_id` int(11) NOT NULL,
+  PRIMARY KEY (`utilisateur_uti_id`,`fil_de_discussion_fil_id`,`fil_de_discussion_groupe_id`),
+  KEY `fk_utilisateur_has_unread_ticket_fil_idx` (`fil_de_discussion_fil_id`),
+  KEY `fk_utilisateur_has_unread_ticket_utilisateur_idx` (`utilisateur_uti_id`),
+  KEY `fk_utilisateur_has_unread_ticket_groupe_idx` (`fil_de_discussion_groupe_id`),
+  CONSTRAINT `fk_utilisateur_has_unread_ticket_groupe` FOREIGN KEY (`fil_de_discussion_groupe_id`) REFERENCES `fil_de_discussion` (`fil_groupe_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_utilisateur_has_unread_ticket_fil` FOREIGN KEY (`fil_de_discussion_fil_id`) REFERENCES `fil_de_discussion` (`fil_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_utilisateur_has_unread_ticket_utilisateur` FOREIGN KEY (`utilisateur_uti_id`) REFERENCES `utilisateur` (`uti_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 -- 2018-01-06 17:24:51
