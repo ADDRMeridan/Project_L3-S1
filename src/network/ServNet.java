@@ -141,7 +141,10 @@ public class ServNet extends Thread {
 
 	private void resetUserView(Ticket tick) {
 
-		// TODO
+		List<Utilisateur> tmp = bdd.getListeUtilisateur(tick.getIdGroupe());
+		for (Utilisateur utilisateur : tmp) {
+			bdd.ajouterTicketNonLu(utilisateur.getUsername(), tick.getId(), tick.getIdGroupe());
+		}
 	}
 
 	private void newTicket(Ticket tick) {
@@ -168,6 +171,7 @@ public class ServNet extends Thread {
 		}
 		if (!notFound) {
 			resetUserView(tick);
+			bdd.supprimerTicketNonLu(userId, tick.getId(), tick.getIdGroupe());
 		}
 	}
 
