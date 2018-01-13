@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.List;
 import java.util.Set;
 
 import struct.Message;
@@ -60,15 +61,15 @@ public class ClientNet {
 	
 	public void createTicket(String title, int idGroup, String firstMess) throws IOException {
 		
-		Ticket tick = new Ticket(title, idGroup, new Message(-1, this.getUsername(), firstMess));
+		Ticket tick = new Ticket(idGroup, title, firstMess);
 		NetPackage pack = new NetPackage(ObjectType.NEW_TICKET, tick);
 		output.writeObject(pack);
 	}
 	
 	public void answerTicket(int idTicket, String mess) throws IOException {
 		
-		Message tmp = new Message(idTicket, this.username, mess);
-		NetPackage pack = new NetPackage(ObjectType.NEW_MESSAGE, tmp);
+		Message tmp = new Message(idTicket, mess);
+		NetPackage pack = new NetPackage(ObjectType.NEW_MESS, tmp);
 		output.writeObject(pack);
 	}
 	
@@ -84,6 +85,18 @@ public class ClientNet {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Message> openTicket(Ticket tick) throws IOException, ClassNotFoundException {
+		
+		NetPackage pack = new NetPackage(ObjectType.OPEN_TICKET, tick);
+		output.writeObject(pack);
+		pack = (NetPackage) input.readObject();
+		if(pack.getObjType() == ObjectType.LIST_MESS) {
+			return (List<Message>) pack.getObj();
+		}
+		return null;
+	}
+	
 	public String getUsername() {
 		return username;
 	}
