@@ -1,11 +1,12 @@
-/*
+package server;
+
+/**
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 import struct.Message;
 import struct.Ticket;
-import struct.Utilisateur;
 import struct.Groupe;
 import java.util.List;
 import java.util.Date;
@@ -109,10 +110,4 @@ public interface IServiceBDD {
      * @return la liste des tickets non lu
      */
     public List <Ticket> listeTicketNonLu(String idUti);
-    /**
-     * Permet d'obtenir la liste des utilisateurs present dans un groupe
-     * @param idGrp l'identifiant unique de ce groupe
-     * @return la liste des utilisateur présen dans le groupe 
-     */
-    public List<Utilisateur> getListeUtilisateur(int idGrp);
 }
