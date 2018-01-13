@@ -5,11 +5,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
 import server.IServiceBDD;
+import server.ServiceBDD;
 import struct.Message;
 import struct.Ticket;
 import struct.Utilisateur;
@@ -39,7 +41,7 @@ public class ServNet extends Thread {
 
 		socketServer = new ServerSocket(SERVERPORT);
 		System.out.println("Server Launched.");
-		// TODO bdd = new Object();
+		bdd = new ServiceBDD();
 	}
 
 	public void launchServer() {
@@ -109,11 +111,14 @@ public class ServNet extends Thread {
 			case NEW_TICKET:
 				newTicket((Ticket) pack.getObj());
 				break;
-			case NEW_MESSAGE:
+			case NEW_MESS:
 				updateTicket((Message) pack.getObj());
 				break;
 			case REFRESH_TREE:
 				fetchUserTickets();
+				break;
+			case OPEN_TICKET:
+				openTicket((Ticket) pack.getObj());
 				break;
 			default:
 				System.err.println("Not server operation.");
@@ -131,15 +136,35 @@ public class ServNet extends Thread {
 		input.close();
 	}
 
+	private void resetUserView(Ticket tick) {
+		
+		//TODO
+	}
+	
 	private void newTicket(Ticket tick) {
 
 		Message first = tick.getFirstMess();
-		bdd.ajouterFil(bdd.nextIdFil(), tick.getTitle(), tick.getIdGroup(), first.getIdMessage(), first.getMessage());
+		int idFil = tick.getId();
+		int idGrp = tick.getIdGroupe();
+		bdd.ajouterFil(bdd.nextIdFil(idGrp), tick.getTitle(), idGrp, bdd.nextIdMsg(idFil, idGrp), first.getMessage(), first.gettWritten());
+		resetUserView(tick);
+		bdd.supprimerTicketNonLu(userId, idFil, idGrp);
 	}
 
 	private void updateTicket(Message mess) {
 
-		bdd.ajouterMsg(mess.getIdMessage(), mess.getMessage(), mess.getIdTicket());
+		bdd.ajouterMsg(mess.getId(), mess.getMessage(), mess.getIdTicket(), mess.getIdGroupe(), mess.gettWritten());
+		List<Ticket> tickets = bdd.getListeTicket(userId);
+		Iterator<Ticket> iter = tickets.iterator();
+		boolean notFound = true;
+		Ticket tick = null;
+		while(iter.hasNext() && notFound) {
+			tick = iter.next();
+			notFound = (tick.getId() == mess.getIdTicket());
+		}
+		if(!notFound) {
+			resetUserView(tick);
+		}
 	}
 
 	private void fetchUserTickets() throws IOException {
@@ -149,5 +174,13 @@ public class ServNet extends Thread {
 		tree.addAll(tmp);
 		NetPackage pack = new NetPackage(ObjectType.TREESET, tree);
 		output.writeObject(pack);
+	}
+	
+	private void openTicket(Ticket tick) throws IOException {
+		
+		List<Message> tmp = bdd.getListeMessage(tick.getId(), tick.getIdGroupe());
+		NetPackage pack = new NetPackage(ObjectType.LIST_MESS, tmp);
+		output.writeObject(pack);
+		bdd.supprimerTicketNonLu(userId, tick.getId(), tick.getIdGroupe());
 	}
 }
