@@ -15,35 +15,54 @@ import java.util.Date;
 
 public class Message {
 
-        private int idGroupe;
-        private int idTicket;
-        private int id;
+	private int idGroupe;
+	private int idTicket;
+	private int id;
 	private String mess;
 	private Date tWritten;
-	
-	public Message(String message) {
+
+	/**
+	 * Constructor to build new Message (Client side)
+	 * @param message
+	 * @param idTicket
+	 */
+	public Message(int idTicket, String message) {
+
 		this.mess = message;
 		this.tWritten = new Date();
+		this.idTicket = idTicket;
+		this.idGroupe = -1;
+		this.id = -1;
 	}
-        
-        public Message(String message,Date date,int idGroupe,int idTicket,int id) {
+
+	/**
+	 * Constructor to rebuild Message from DB (Server side)
+	 * @param message
+	 * @param date
+	 * @param idGroupe
+	 * @param idTicket
+	 * @param id
+	 */
+	public Message(int id, String message, Date date, int idGroupe, int idTicket) {
+
 		this.mess = message;
 		this.tWritten = date;
-                this.idGroupe=idGroupe;
-                this.id=id;
-                this.idTicket=idTicket;
+		this.idGroupe = idGroupe;
+		this.id = id;
+		this.idTicket = idTicket;
 	}
-        
-        public int getId(){
-            return id;
-        }
-        public int getIdTicket() {
-                return idTicket;
-        }
-        
-        public int getIdGroupe() {
-            return idGroupe;
-        }
+
+	public int getId() {
+		return id;
+	}
+
+	public int getIdTicket() {
+		return idTicket;
+	}
+
+	public int getIdGroupe() {
+		return idGroupe;
+	}
 
 	public String getMessage() {
 		return mess;
