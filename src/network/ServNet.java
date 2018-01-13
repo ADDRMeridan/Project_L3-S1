@@ -1,5 +1,6 @@
 package network;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -35,17 +36,17 @@ public class ServNet extends Thread {
 		this.socket = socket;
 		output = new ObjectOutputStream(socket.getOutputStream());
 		input = new ObjectInputStream(socket.getInputStream());
+		bdd = new ServiceBDD();
 	}
 
 	public ServNet() throws IOException {
 
 		socketServer = new ServerSocket(SERVERPORT);
-		System.out.println("Server Launched.");
-		bdd = new ServiceBDD();
 	}
 
 	public void launchServer() {
-		
+
+		System.out.println("Server Launched.");
 		while (serverOn) {
 			try {
 				Socket socketClient = socketServer.accept();
@@ -57,7 +58,7 @@ public class ServNet extends Thread {
 			}
 		}
 	}
-	
+
 	public String getUsername() {
 		return userId;
 	}
@@ -76,12 +77,12 @@ public class ServNet extends Thread {
 	}
 
 	private void logIn() {
-		
+
 		try {
 			NetPackage pack = (NetPackage) input.readObject();
-			if(pack.getObjType() == ObjectType.LOGIN) {
+			if (pack.getObjType() == ObjectType.LOGIN) {
 				Utilisateur user = (Utilisateur) pack.getObj();
-				if(bdd.authentification(user.getUsername(), user.getMdp())) {
+				if (bdd.authentification(user.getUsername(), user.getMdp())) {
 					pack = new NetPackage(ObjectType.LOGIN_ANS, new Boolean(true));
 					logIn = true;
 					userId = user.getUsername();
@@ -89,12 +90,14 @@ public class ServNet extends Thread {
 					pack = new NetPackage(ObjectType.LOGIN_ANS, new Boolean(false));
 				}
 				output.writeObject(pack);
-			} else if(pack.getObjType() == ObjectType.LOGOFF){
+			} else if (pack.getObjType() == ObjectType.LOGOFF) {
 				logOff();
 			}
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
+		} catch (EOFException e) {
 			serverOn = false;
+		} catch (ClassNotFoundException | IOException e) {
+			serverOn = false;
+			e.printStackTrace();
 		}
 	}
 
@@ -137,16 +140,17 @@ public class ServNet extends Thread {
 	}
 
 	private void resetUserView(Ticket tick) {
-		
-		//TODO
+
+		// TODO
 	}
-	
+
 	private void newTicket(Ticket tick) {
 
 		Message first = tick.getFirstMess();
 		int idFil = tick.getId();
 		int idGrp = tick.getIdGroupe();
-		bdd.ajouterFil(bdd.nextIdFil(idGrp), tick.getTitle(), idGrp, bdd.nextIdMsg(idFil, idGrp), first.getMessage(), first.gettWritten());
+		bdd.ajouterFil(bdd.nextIdFil(idGrp), tick.getTitle(), idGrp, bdd.nextIdMsg(idFil, idGrp), first.getMessage(),
+				first.gettWritten());
 		resetUserView(tick);
 		bdd.supprimerTicketNonLu(userId, idFil, idGrp);
 	}
@@ -158,26 +162,26 @@ public class ServNet extends Thread {
 		Iterator<Ticket> iter = tickets.iterator();
 		boolean notFound = true;
 		Ticket tick = null;
-		while(iter.hasNext() && notFound) {
+		while (iter.hasNext() && notFound) {
 			tick = iter.next();
 			notFound = (tick.getId() == mess.getIdTicket());
 		}
-		if(!notFound) {
+		if (!notFound) {
 			resetUserView(tick);
 		}
 	}
 
 	private void fetchUserTickets() throws IOException {
-		
+
 		List<Ticket> tmp = bdd.getListeTicket(userId);
 		Set<Ticket> tree = new TreeSet<>();
 		tree.addAll(tmp);
 		NetPackage pack = new NetPackage(ObjectType.TREESET, tree);
 		output.writeObject(pack);
 	}
-	
+
 	private void openTicket(Ticket tick) throws IOException {
-		
+
 		List<Message> tmp = bdd.getListeMessage(tick.getId(), tick.getIdGroupe());
 		NetPackage pack = new NetPackage(ObjectType.LIST_MESS, tmp);
 		output.writeObject(pack);
