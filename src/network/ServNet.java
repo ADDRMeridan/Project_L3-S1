@@ -178,7 +178,12 @@ public class ServNet extends Thread {
 	private void fetchUserTickets() throws IOException {
 
 		List<Ticket> tmp = bdd.getListeTicket(userId);
+		List<Ticket> tmpNew = bdd.listeTicketNonLu(userId);
+		for (Ticket ticket : tmpNew) {
+			ticket.setSeen(false);
+		}
 		Set<Ticket> tree = new TreeSet<>();
+		tree.addAll(tmpNew);
 		tree.addAll(tmp);
 		NetPackage pack = new NetPackage(ObjectType.TREESET, tree);
 		output.writeObject(pack);
