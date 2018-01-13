@@ -133,7 +133,7 @@ public class AjouterGroupeFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int idGroupe=0;
         Boolean idOK=true;
-        Serveur serv=new Serveur();
+        GestionBDD serv=new GestionBDD();
         try{
             idGroupe=Integer.parseInt(jTextField1.getText());
         }catch(java.lang.NumberFormatException e){
