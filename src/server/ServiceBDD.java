@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package server;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -12,19 +9,23 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import struct.Utilisateur;
+
 import struct.Groupe;
 import struct.Message;
 import struct.Ticket;
+import struct.Utilisateur;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 /**
  *
  * @author matthieulenoir
  */
 public class ServiceBDD implements IServiceBDD {
-
-
-
-
 
 	@Override
 	public boolean authentification(String idUtilisateur, String motDePasse) {
@@ -503,55 +504,62 @@ public class ServiceBDD implements IServiceBDD {
 		}
 		return l;
 	}
-     /**
-     * Permet d'obtenir sous la forme d'une structure Utilisateur un utilisateur de la base de donnée 
-     * @param idUti l'identifiant unique de cet utilisateur
-     * @return une structure Utilisateur avec toutes les informations de l'utilisateur présent dans le base de donnée
-     */
-    private Utilisateur getInfoUtilisateur(String idUti){
-        Utilisateur u;
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            String url= "jdbc:mysql://localhost:8889/mydb";
-            String user="root";
-            String passwd ="root";
-            Connection conn= DriverManager.getConnection(url,user,passwd);
-            Statement state= conn.createStatement();
-            String newIdUti="'"+idUti+"'";
-            ResultSet result = state.executeQuery("SELECT * FROM utilisateur WHERE uti_id="+newIdUti+" LIMIT 1");
-            result.next();
-            String nom=result.getObject(2).toString();
-            String prenom=result.getObject(3).toString();
-            String password=result.getObject(4).toString();
-            u=new Utilisateur(idUti,password,nom,prenom);
-            state.close();
-            return u;
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        throw new NullPointerException();
-    }
-    @Override
-    public List<Utilisateur> getListeUtilisateur(int idGrp){
-        List<Utilisateur>l=new ArrayList();
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            String url= "jdbc:mysql://localhost:8889/mydb";
-            String user="root";
-            String passwd ="root";
-            Connection conn= DriverManager.getConnection(url,user,passwd);
-            Statement state= conn.createStatement();
-            ResultSet result = state.executeQuery("SELECT * FROM utilisateur_has_groupe WHERE groupe_grp_id="+idGrp+"");
-            while(result.next()){
-                String idUti=result.getObject(1).toString();
-                Utilisateur u=getInfoUtilisateur(idUti);
-                l.add(u);
-            }
-            result.close();
-            state.close();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return l;
-    }
+
+	/**
+	 * Permet d'obtenir sous la forme d'une structure Utilisateur un utilisateur de
+	 * la base de donnée
+	 * 
+	 * @param idUti
+	 *            l'identifiant unique de cet utilisateur
+	 * @return une structure Utilisateur avec toutes les informations de
+	 *         l'utilisateur présent dans le base de donnée
+	 */
+	private Utilisateur getInfoUtilisateur(String idUti) {
+		Utilisateur u;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:8889/mydb";
+			String user = "root";
+			String passwd = "root";
+			Connection conn = DriverManager.getConnection(url, user, passwd);
+			Statement state = conn.createStatement();
+			String newIdUti = "'" + idUti + "'";
+			ResultSet result = state.executeQuery("SELECT * FROM utilisateur WHERE uti_id=" + newIdUti + " LIMIT 1");
+			result.next();
+			String nom = result.getObject(2).toString();
+			String prenom = result.getObject(3).toString();
+			String password = result.getObject(4).toString();
+			u = new Utilisateur(idUti, password, nom, prenom);
+			state.close();
+			return u;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		throw new NullPointerException();
+	}
+
+	@Override
+	public List<Utilisateur> getListeUtilisateur(int idGrp) {
+		List<Utilisateur> l = new ArrayList<>();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:8889/mydb";
+			String user = "root";
+			String passwd = "root";
+			Connection conn = DriverManager.getConnection(url, user, passwd);
+			Statement state = conn.createStatement();
+			ResultSet result = state
+					.executeQuery("SELECT * FROM utilisateur_has_groupe WHERE groupe_grp_id=" + idGrp + "");
+			while (result.next()) {
+				String idUti = result.getObject(1).toString();
+				Utilisateur u = getInfoUtilisateur(idUti);
+				l.add(u);
+			}
+			result.close();
+			state.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return l;
+	}
 }
