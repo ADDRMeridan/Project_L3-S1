@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package server;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -12,19 +9,23 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import struct.Utilisateur;
+
 import struct.Groupe;
 import struct.Message;
 import struct.Ticket;
+import struct.Utilisateur;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 /**
  *
  * @author matthieulenoir
  */
 public class ServiceBDD implements IServiceBDD {
-
-
-
-
 
 	@Override
 	public boolean authentification(String idUtilisateur, String motDePasse) {
@@ -571,6 +572,7 @@ public class ServiceBDD implements IServiceBDD {
 		}
 		return l;
 	}
+  
      /**
      * Permet d'obtenir sous la forme d'une structure Utilisateur un utilisateur de la base de donnée 
      * @param idUti l'identifiant unique de cet utilisateur

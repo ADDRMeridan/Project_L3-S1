@@ -21,8 +21,12 @@ public class Ticket {
 	private Message firstMess;
 	private Date dateLastMess;
 	private List<Message> messages;
+	private boolean seen;
 
 	/**
+	public void setSeen(boolean seen) {
+		this.seen = seen;
+	}
 	 * Constructor to build new Ticket (Client side)
 	 * @param idGroupe
 	 * @param title
@@ -36,10 +40,12 @@ public class Ticket {
 		this.firstMess = new Message(this.id, firstMess);
 		this.dateLastMess = this.firstMess.gettWritten();
 		this.messages = new ArrayList<>();
+		this.seen = true;
 	}
 
 	/**
 	 * Constructor to rebuild Ticket from DB (Server side)
+	 * 
 	 * @param title
 	 * @param id
 	 * @param idGroupe
@@ -55,11 +61,12 @@ public class Ticket {
 		this.idGroupe = idGroupe;
 		this.messages = new ArrayList<>();
 		this.messages.addAll(messages);
-		if(this.messages.isEmpty()) {
+		if (this.messages.isEmpty()) {
 			this.dateLastMess = firstMess.gettWritten();
 		} else {
 			this.dateLastMess = this.messages.get(this.messages.size()).gettWritten();
 		}
+		this.seen = false;
 	}
 
 	public Date getDateLastMess() {
@@ -86,4 +93,29 @@ public class Ticket {
 		return messages;
 	}
 
+	public boolean isSeen() {
+		return seen;
+	}
+
+	public void setSeen(boolean seen) {
+		this.seen = seen;
+	}
+	
+	public int compareTo(Ticket tick) {
+		
+		if(this.id == tick.id) {
+			return 0;
+		}
+		if(this.seen && !tick.seen) {
+			return 1;
+		}
+		if(!this.seen && tick.seen) {
+			return -1;
+		}
+		int compDate = this.dateLastMess.compareTo(tick.getDateLastMess());
+		if(compDate != 0) {
+			return compDate;
+		}
+		return this.title.compareTo(tick.title);
+	}
 }
