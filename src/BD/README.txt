@@ -1,13 +1,6 @@
-######  Créer la base de donnée ######
-- Télécharger LAMP(pour Linux), MAMP(pour Mac) ou WAMP(pour Windows)
-- Une fois télécharger lancer le logiciel et cliquer sur Préférence
-- Aller dans l'onglet Web Server
-- Dans Documents Root sélectionner htdocs(en cliquant sur la flèche puis en sélectionnant le repertoire htdocs)
-- Ajouter dans htdocs le ficher adminer.php
-- Sur le logiciel cliquer maintenant sur Démarrer les serveurs
-- Normalement une page web devrait se lancer si ce n'est pas le cas cliquer sur Open WebStart page
-- Sur la page web cliquer sur l'onglet Mon Site Web et selectionner adminer.php
-- Entrer comme Utilisateur et Mot de passe root et appuyer sur entrer
-- Cliquer sur Créer une base de données appeler la mydb puis cliquer sur Enregistrer
-- Cliquer ensuite sur Importer puis sur Choisir les fichiers et selectionner le fichier BDProjet.sql
-- Cliquer sur Executer votre base de donnée dervait etre créer.
+######  Pour accéder à la base de donnée en ligne ######
+-Cliquer sur ce lien : http://www.phpmyadmin.co/db_structure.php?db=sql11215552
+-Comme serveur mettre:  sql11.freesqldatabase.com
+-Comme identifiant mettre: sql11215552
+-Comme mot de passe mettre: HLaZ9P7drD
+-La bse de donée s'appelle sql11215552
