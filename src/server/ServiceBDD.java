@@ -30,16 +30,16 @@ public class ServiceBDD implements IServiceBDD {
 	@Override
 	public boolean authentification(String idUtilisateur, String motDePasse) {
 		boolean authOK;
-                try{
-                    Class.forName("com.mysql.jdbc.Driver");
-                } catch (ClassNotFoundException e) {
-                    System.out.println(" Unable to load driver. ");
-                }
-                String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-                String username = "sql11215552";
-                String passd = "HLaZ9P7drD";
-                try {
-                        Connection conn = DriverManager.getConnection(url, username, passd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
+		String username = "sql11215552";
+		String passd = "HLaZ9P7drD";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
 			idUtilisateur = "'" + idUtilisateur + "'";
 			motDePasse = "'" + motDePasse + "'";
@@ -62,16 +62,16 @@ public class ServiceBDD implements IServiceBDD {
 		if (nbFil == 0) {
 			return nextID;
 		}
-                try{
-                   Class.forName("com.mysql.jdbc.Driver");
-                } catch (ClassNotFoundException e) {
-                   System.out.println(" Unable to load driver. ");
-                }
-                String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-                String username = "sql11215552";
-                String passd = "HLaZ9P7drD";
-                try {
-                        Connection conn = DriverManager.getConnection(url, username, passd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
+		String username = "sql11215552";
+		String passd = "HLaZ9P7drD";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
 			ResultSet result = state.executeQuery("SELECT * FROM fil_de_discussion WHERE fil_groupe_id=" + idGrp + "");
 			for (int i = 0; i < nbFil; i++) {
@@ -96,16 +96,16 @@ public class ServiceBDD implements IServiceBDD {
 	 */
 	private int nbFil(int idGrp) {
 		int nbFil = 0;
-                try{
-                    Class.forName("com.mysql.jdbc.Driver");
-                } catch (ClassNotFoundException e) {
-                    System.out.println(" Unable to load driver. ");
-                }
-                String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-                String username = "sql11215552";
-                String passd = "HLaZ9P7drD";
-                try {
-                        Connection conn = DriverManager.getConnection(url, username, passd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
+		String username = "sql11215552";
+		String passd = "HLaZ9P7drD";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
 			ResultSet result = state.executeQuery("SELECT * FROM fil_de_discussion WHERE fil_groupe_id=" + idGrp + "");
 			while (result.next())
@@ -126,16 +126,16 @@ public class ServiceBDD implements IServiceBDD {
 		if (nbFil == 0) {
 			return nextID;
 		}
-                try{
-                    Class.forName("com.mysql.jdbc.Driver");
-                } catch (ClassNotFoundException e) {
-                    System.out.println(" Unable to load driver. ");
-                }
-                String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-                String username = "sql11215552";
-                String passd = "HLaZ9P7drD";
-                try {
-                        Connection conn = DriverManager.getConnection(url, username, passd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
+		String username = "sql11215552";
+		String passd = "HLaZ9P7drD";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
 			ResultSet result = state.executeQuery(
 					"SELECT * FROM message WHERE msg_fil_id=" + idFil + " AND msg_groupe_id=" + idGrp + "");
@@ -163,16 +163,16 @@ public class ServiceBDD implements IServiceBDD {
 	 */
 	private int nbMsg(int idFil, int idGrp) {
 		int nbMsg = 0;
-                try{
-                    Class.forName("com.mysql.jdbc.Driver");
-                } catch (ClassNotFoundException e) {
-                    System.out.println(" Unable to load driver. ");
-                }
-                String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-                String username = "sql11215552";
-                String passd = "HLaZ9P7drD";
-                try {
-                        Connection conn = DriverManager.getConnection(url, username, passd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
+		String username = "sql11215552";
+		String passd = "HLaZ9P7drD";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
 			ResultSet result = state.executeQuery(
 					"SELECT * FROM message WHERE msg_fil_id=" + idFil + " AND msg_groupe_id=" + idGrp + "");
@@ -189,16 +189,16 @@ public class ServiceBDD implements IServiceBDD {
 
 	@Override
 	public boolean ajouterFil(int idFil, String nom, int idGrp, int idMsg, String contenuMsg, Date date) {
-                    try{
-                        Class.forName("com.mysql.jdbc.Driver");
-                    } catch (ClassNotFoundException e) {
-                        System.out.println(" Unable to load driver. ");
-                    }
-                    String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-                    String username = "sql11215552";
-                    String passd = "HLaZ9P7drD";
-                    try {
-                        Connection conn = DriverManager.getConnection(url, username, passd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
+		String username = "sql11215552";
+		String passd = "HLaZ9P7drD";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
 			nom = "'" + nom + "'";
 			java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -221,16 +221,16 @@ public class ServiceBDD implements IServiceBDD {
 
 	@Override
 	public boolean ajouterMsg(int idMsg, String contenuMsg, int idFil, int idGrp, Date date) {
-            try{
-                Class.forName("com.mysql.jdbc.Driver");
-            } catch (ClassNotFoundException e) {
-                System.out.println(" Unable to load driver. ");
-            }
-            String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-            String username = "sql11215552";
-            String passd = "HLaZ9P7drD";
-            try {
-                        Connection conn = DriverManager.getConnection(url, username, passd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
+		String username = "sql11215552";
+		String passd = "HLaZ9P7drD";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
 			contenuMsg = "'" + contenuMsg + "'";
 			java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -254,16 +254,16 @@ public class ServiceBDD implements IServiceBDD {
 	@Override
 	public List<Message> getListeMessage(int idFil, int idGrp) {
 		List<Message> l = new ArrayList<>();
-                try{
-                    Class.forName("com.mysql.jdbc.Driver");
-                } catch (ClassNotFoundException e) {
-                    System.out.println(" Unable to load driver. ");
-                }
-                String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-                String username = "sql11215552";
-                String passd = "HLaZ9P7drD";
-                try {
-                        Connection conn = DriverManager.getConnection(url, username, passd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
+		String username = "sql11215552";
+		String passd = "HLaZ9P7drD";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
 			ResultSet result = state.executeQuery(
 					"SELECT * FROM message WHERE msg_fil_id=" + idFil + " AND msg_groupe_id=" + idGrp + "");
@@ -298,16 +298,16 @@ public class ServiceBDD implements IServiceBDD {
 	 */
 	private Message getMessage(int idGrp, int idFil, int msgId) {
 		Message m;
-                try{
-                    Class.forName("com.mysql.jdbc.Driver");
-                } catch (ClassNotFoundException e) {
-                    System.out.println(" Unable to load driver. ");
-                }
-                String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-                String username = "sql11215552";
-                String passd = "HLaZ9P7drD";
-                try {
-                        Connection conn = DriverManager.getConnection(url, username, passd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
+		String username = "sql11215552";
+		String passd = "HLaZ9P7drD";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
 			ResultSet result = state.executeQuery("SELECT * FROM message WHERE msg_groupe_id=" + idGrp
 					+ " AND msg_fil_id=" + idFil + " AND msg_id=" + msgId + " LIMIT 1");
@@ -328,16 +328,16 @@ public class ServiceBDD implements IServiceBDD {
 	@Override
 	public List<Ticket> getListeTicket(int idGrp) {
 		List<Ticket> l = new ArrayList<>();
-                try{
-                    Class.forName("com.mysql.jdbc.Driver");
-                } catch (ClassNotFoundException e) {
-                    System.out.println(" Unable to load driver. ");
-                }
-                String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-                String username = "sql11215552";
-                String passd = "HLaZ9P7drD";
-                try {
-                        Connection conn = DriverManager.getConnection(url, username, passd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
+		String username = "sql11215552";
+		String passd = "HLaZ9P7drD";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
 			ResultSet result = state.executeQuery("SELECT * FROM fil_de_discussion WHERE fil_groupe_id=" + idGrp + "");
 			while (result.next()) {
@@ -364,16 +364,16 @@ public class ServiceBDD implements IServiceBDD {
 	 */
 	private String getNomGroupe(int idGroupe) {
 		String nom = "";
-                try{
-                    Class.forName("com.mysql.jdbc.Driver");
-                } catch (ClassNotFoundException e) {
-                    System.out.println(" Unable to load driver. ");
-                }
-                String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-                String username = "sql11215552";
-                String passd = "HLaZ9P7drD";
-                try {
-                        Connection conn = DriverManager.getConnection(url, username, passd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
+		String username = "sql11215552";
+		String passd = "HLaZ9P7drD";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
 			ResultSet result = state.executeQuery("SELECT * FROM groupe WHERE grp_id=" + idGroupe + " LIMIT 1");
 			result.next();
@@ -389,16 +389,16 @@ public class ServiceBDD implements IServiceBDD {
 	@Override
 	public List<Groupe> getListeGroupe(String idUti) {
 		List<Groupe> l = new ArrayList<>();
-                try{
-                    Class.forName("com.mysql.jdbc.Driver");
-                } catch (ClassNotFoundException e) {
-                     System.out.println(" Unable to load driver. ");
-                }
-                String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-                String username = "sql11215552";
-                String passd = "HLaZ9P7drD";
-                try {
-                        Connection conn = DriverManager.getConnection(url, username, passd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
+		String username = "sql11215552";
+		String passd = "HLaZ9P7drD";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
 			idUti = "'" + idUti + "'";
 			ResultSet result = state
@@ -429,16 +429,16 @@ public class ServiceBDD implements IServiceBDD {
 	@Override
 	public boolean utilisateurExiste(String idUti) {
 		boolean existe;
-                try{
-                    Class.forName("com.mysql.jdbc.Driver");
-                } catch (ClassNotFoundException e) {
-                    System.out.println(" Unable to load driver. ");
-                }
-                String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-                String username = "sql11215552";
-                String passd = "HLaZ9P7drD";
-                try {
-                        Connection conn = DriverManager.getConnection(url, username, passd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
+		String username = "sql11215552";
+		String passd = "HLaZ9P7drD";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
 			idUti = "'" + idUti + "'";
 			ResultSet result = state.executeQuery("SELECT * FROM utilisateur WHERE uti_id=" + idUti + " LIMIT 1");
@@ -454,16 +454,16 @@ public class ServiceBDD implements IServiceBDD {
 
 	@Override
 	public boolean ajouterTicketNonLu(String idUti, int idFil, int idGrp) {
-                try{
-                    Class.forName("com.mysql.jdbc.Driver");
-                } catch (ClassNotFoundException e) {
-                    System.out.println(" Unable to load driver. ");
-                }
-                String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-                String username = "sql11215552";
-                String passd = "HLaZ9P7drD";
-                try {
-                        Connection conn = DriverManager.getConnection(url, username, passd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
+		String username = "sql11215552";
+		String passd = "HLaZ9P7drD";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
 			idUti = "'" + idUti + "'";
 			state.executeUpdate(
@@ -482,16 +482,16 @@ public class ServiceBDD implements IServiceBDD {
 
 	@Override
 	public boolean supprimerTicketNonLu(String idUti, int idFil, int idGrp) {
-            try{
-                 Class.forName("com.mysql.jdbc.Driver");
-            } catch (ClassNotFoundException e) {
-                System.out.println(" Unable to load driver. ");
-            }
-            String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-            String username = "sql11215552";
-            String passd = "HLaZ9P7drD";
-            try {
-                        Connection conn = DriverManager.getConnection(url, username, passd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
+		String username = "sql11215552";
+		String passd = "HLaZ9P7drD";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
 			idUti = "'" + idUti + "'";
 			state.executeUpdate("DELETE FROM utilisateur_has_unread_ticket WHERE utilisateur_uti_id=" + idUti
@@ -517,16 +517,16 @@ public class ServiceBDD implements IServiceBDD {
 	 */
 	private Ticket getInfoTicket(int idFil, int idGrp) {
 		Ticket t;
-            try{
-                Class.forName("com.mysql.jdbc.Driver");
-            }  catch (ClassNotFoundException e) {
-                System.out.println(" Unable to load driver. ");
-            }
-            String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-            String username = "sql11215552";
-            String passd = "HLaZ9P7drD";
-            try {
-                        Connection conn = DriverManager.getConnection(url, username, passd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
+		String username = "sql11215552";
+		String passd = "HLaZ9P7drD";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
 			ResultSet result = state.executeQuery("SELECT * FROM fil_de_discussion WHERE fil_id=" + idFil
 					+ " AND fil_groupe_id=" + idGrp + " LIMIT 1");
@@ -545,16 +545,16 @@ public class ServiceBDD implements IServiceBDD {
 	@Override
 	public List<Ticket> listeTicketNonLu(String idUti) {
 		List<Ticket> l = new ArrayList<>();
-                try{
-                    Class.forName("com.mysql.jdbc.Driver");
-                } catch (ClassNotFoundException e) {
-                    System.out.println(" Unable to load driver. ");
-                }
-                String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-                String username = "sql11215552";
-                String passd = "HLaZ9P7drD";
-                try {
-                        Connection conn = DriverManager.getConnection(url, username, passd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
+		String username = "sql11215552";
+		String passd = "HLaZ9P7drD";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
 			idUti = "'" + idUti + "'";
 			ResultSet result = state
@@ -572,64 +572,70 @@ public class ServiceBDD implements IServiceBDD {
 		}
 		return l;
 	}
-  
-     /**
-     * Permet d'obtenir sous la forme d'une structure Utilisateur un utilisateur de la base de donnée 
-     * @param idUti l'identifiant unique de cet utilisateur
-     * @return une structure Utilisateur avec toutes les informations de l'utilisateur présent dans le base de donnée
-     */
-    private Utilisateur getInfoUtilisateur(String idUti){
-        Utilisateur u;
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println(" Unable to load driver. ");
-        }
-        String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-        String username = "sql11215552";
-        String passd = "HLaZ9P7drD";
-        try {
-            Connection conn = DriverManager.getConnection(url, username, passd);
-            Statement state= conn.createStatement();
-            String newIdUti="'"+idUti+"'";
-            ResultSet result = state.executeQuery("SELECT * FROM utilisateur WHERE uti_id="+newIdUti+" LIMIT 1");
-            result.next();
-            String nom=result.getObject(2).toString();
-            String prenom=result.getObject(3).toString();
-            String password=result.getObject(4).toString();
-            u=new Utilisateur(idUti,password,nom,prenom);
-            state.close();
-            return u;
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        throw new NullPointerException();
-    }
-    @Override
-    public List<Utilisateur> getListeUtilisateur(int idGrp){
-        List<Utilisateur>l=new ArrayList();
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println(" Unable to load driver. ");
-        }
-        String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-        String username = "sql11215552";
-        String passd = "HLaZ9P7drD";
-        try {
-            Connection conn = DriverManager.getConnection(url, username, passd);
-            Statement state= conn.createStatement();
-            ResultSet result = state.executeQuery("SELECT * FROM utilisateur_has_groupe WHERE groupe_grp_id="+idGrp+"");
-            while(result.next()){
-                String idUti=result.getObject(1).toString();
-                Utilisateur u=getInfoUtilisateur(idUti);
-                l.add(u);
-            }
-            result.close();
-            state.close();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return l;
-    }
+
+	/**
+	 * Permet d'obtenir sous la forme d'une structure Utilisateur un utilisateur de
+	 * la base de donnée
+	 * 
+	 * @param idUti
+	 *            l'identifiant unique de cet utilisateur
+	 * @return une structure Utilisateur avec toutes les informations de
+	 *         l'utilisateur présent dans le base de donnée
+	 */
+	private Utilisateur getInfoUtilisateur(String idUti) {
+		Utilisateur u;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
+		String username = "sql11215552";
+		String passd = "HLaZ9P7drD";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
+			Statement state = conn.createStatement();
+			String newIdUti = "'" + idUti + "'";
+			ResultSet result = state.executeQuery("SELECT * FROM utilisateur WHERE uti_id=" + newIdUti + " LIMIT 1");
+			result.next();
+			String nom = result.getObject(2).toString();
+			String prenom = result.getObject(3).toString();
+			String password = result.getObject(4).toString();
+			u = new Utilisateur(idUti, password, nom, prenom);
+			state.close();
+			return u;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		throw new NullPointerException();
+	}
+
+	@Override
+	public List<Utilisateur> getListeUtilisateur(int idGrp) {
+		List<Utilisateur> l = new ArrayList<>();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
+		String username = "sql11215552";
+		String passd = "HLaZ9P7drD";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
+			Statement state = conn.createStatement();
+			ResultSet result = state
+					.executeQuery("SELECT * FROM utilisateur_has_groupe WHERE groupe_grp_id=" + idGrp + "");
+			while (result.next()) {
+				String idUti = result.getObject(1).toString();
+				Utilisateur u = getInfoUtilisateur(idUti);
+				l.add(u);
+			}
+			result.close();
+			state.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return l;
+	}
 }
