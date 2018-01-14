@@ -17,7 +17,6 @@ public class Groupe {
         this.nom=nom;
         this.idGroupe=idGroupe;
     }
-    
     public String getNom() {
         return nom;
     }
