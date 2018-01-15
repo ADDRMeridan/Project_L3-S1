@@ -155,6 +155,7 @@ public class ModifierUtilisateurFrame1 extends javax.swing.JFrame {
 				}
 				result.close();
 				state.close();
+				conn.close();
 			} catch (Exception e) {
 				idOK = false;
 				jTextField3.setText("Erreur inconnu");
