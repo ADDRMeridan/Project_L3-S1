@@ -48,6 +48,7 @@ public class ServiceBDD implements IServiceBDD {
 			authOK = result.next();
 			result.close();
 			state.close();
+			conn.close();
 			return authOK;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,6 +81,7 @@ public class ServiceBDD implements IServiceBDD {
 			nextID = result.getInt(1) + 1;
 			result.close();
 			state.close();
+			conn.close();
 			return nextID;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -112,6 +114,7 @@ public class ServiceBDD implements IServiceBDD {
 				nbFil++;
 			result.close();
 			state.close();
+			conn.close();
 			return nbFil;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -145,6 +148,7 @@ public class ServiceBDD implements IServiceBDD {
 			nextID = result.getInt(1) + 1;
 			result.close();
 			state.close();
+			conn.close();
 			return nextID;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -180,6 +184,7 @@ public class ServiceBDD implements IServiceBDD {
 				nbMsg++;
 			result.close();
 			state.close();
+			conn.close();
 			return nbMsg;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -208,6 +213,7 @@ public class ServiceBDD implements IServiceBDD {
 					"INSERT INTO fil_de_discussion (fil_id, fil_nom,fil_groupe_id,fil_premier_msg_id,fil_date_dernier_msg) VALUES ("
 							+ idFil + "," + nom + "," + idGrp + "," + idMsg + "," + currentTime + ");");
 			state.close();
+			conn.close();
 			ServiceBDD s = new ServiceBDD();
 			return s.ajouterMsg(idMsg, contenuMsg, idFil, idGrp, date);
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e1) {
@@ -241,6 +247,7 @@ public class ServiceBDD implements IServiceBDD {
 			state.executeUpdate("UPDATE fil_de_discussion SET fil_date_dernier_msg= " + currentTime + " WHERE fil_id="
 					+ idFil + " AND fil_groupe_id=" + idGrp + "");
 			state.close();
+			conn.close();
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e1) {
 			System.out.println("idFil déjà utiliser pour un message!");
 			return false;
@@ -277,6 +284,7 @@ public class ServiceBDD implements IServiceBDD {
 			}
 			result.close();
 			state.close();
+			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -318,6 +326,7 @@ public class ServiceBDD implements IServiceBDD {
 			m = new Message(msgId, contenu, date, idGrp, idFil);
 			result.close();
 			state.close();
+			conn.close();
 			return m;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -349,6 +358,7 @@ public class ServiceBDD implements IServiceBDD {
 			}
 			result.close();
 			state.close();
+			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -380,6 +390,7 @@ public class ServiceBDD implements IServiceBDD {
 			nom = result.getObject(2).toString();
 			result.close();
 			state.close();
+			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -410,6 +421,7 @@ public class ServiceBDD implements IServiceBDD {
 			}
 			result.close();
 			state.close();
+			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -445,6 +457,7 @@ public class ServiceBDD implements IServiceBDD {
 			existe = result.next();
 			result.close();
 			state.close();
+			conn.close();
 			return existe;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -470,6 +483,7 @@ public class ServiceBDD implements IServiceBDD {
 					"INSERT INTO utilisateur_has_unread_ticket (utilisateur_uti_id, fil_de_discussion_fil_id,fil_de_discussion_groupe_id) VALUES ("
 							+ idUti + "," + idFil + "," + idGrp + ");");
 			state.close();
+			conn.close();
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e1) {
 			System.out.println("Utilisateur et message déjà associer");
 			return false;
@@ -497,6 +511,7 @@ public class ServiceBDD implements IServiceBDD {
 			state.executeUpdate("DELETE FROM utilisateur_has_unread_ticket WHERE utilisateur_uti_id=" + idUti
 					+ " AND fil_de_discussion_fil_id=" + idFil + " AND fil_de_discussion_groupe_id=" + idGrp + "");
 			state.close();
+			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -535,6 +550,7 @@ public class ServiceBDD implements IServiceBDD {
 			int msgId = result.getInt(4);
 			t = new Ticket(nom, idFil, idGrp, getMessage(idGrp, idFil, msgId), new ArrayList<>());
 			state.close();
+			conn.close();
 			return t;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -567,6 +583,7 @@ public class ServiceBDD implements IServiceBDD {
 			}
 			result.close();
 			state.close();
+			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -603,6 +620,7 @@ public class ServiceBDD implements IServiceBDD {
 			String password = result.getObject(4).toString();
 			u = new Utilisateur(idUti, password, nom, prenom);
 			state.close();
+			conn.close();
 			return u;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -633,6 +651,7 @@ public class ServiceBDD implements IServiceBDD {
 			}
 			result.close();
 			state.close();
+			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
