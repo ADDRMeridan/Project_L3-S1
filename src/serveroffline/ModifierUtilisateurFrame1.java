@@ -1,15 +1,24 @@
-package server;
+package serveroffline;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+/*
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.sql.Statement;
+
+import server.AjouterUtilisateurFrame;
+import server.JFrameServeur;
 
 /**
  *
  * @author matthieulenoir
  */
-public class AjouterUtilisateurFrame extends javax.swing.JFrame {
+public class ModifierUtilisateurFrame1 extends javax.swing.JFrame {
 
     /**
 	 * DEFAULT
@@ -18,7 +27,7 @@ public class AjouterUtilisateurFrame extends javax.swing.JFrame {
 	/**
      * Creates new form AjouterUtilisateurFrame
      */
-    public AjouterUtilisateurFrame() {
+    public ModifierUtilisateurFrame1() {
         initComponents();
     }
 
@@ -38,10 +47,10 @@ public class AjouterUtilisateurFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
         jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
 
@@ -53,21 +62,12 @@ public class AjouterUtilisateurFrame extends javax.swing.JFrame {
 
         jPanel2.setBackground(java.awt.Color.darkGray);
         jPanel2.setLayout(new java.awt.GridLayout(5, 0));
-
-        jLabel2.setForeground(java.awt.Color.white);
-        jLabel2.setText("Id utilisateur:");
         jPanel2.add(jLabel2);
-
-        jLabel1.setForeground(java.awt.Color.white);
-        jLabel1.setText("Prenom: ");
         jPanel2.add(jLabel1);
 
         jLabel3.setForeground(java.awt.Color.white);
-        jLabel3.setText("Nom:");
+        jLabel3.setText("Id utilisateur:");
         jPanel2.add(jLabel3);
-
-        jLabel4.setForeground(java.awt.Color.white);
-        jLabel4.setText("Mot de passe:");
         jPanel2.add(jLabel4);
 
         jButton2.setBackground(java.awt.Color.white);
@@ -84,10 +84,15 @@ public class AjouterUtilisateurFrame extends javax.swing.JFrame {
         jPanel3.setBackground(java.awt.Color.darkGray);
         jPanel3.setLayout(new java.awt.GridLayout(5, 0));
 
-        jPanel3.add(jTextField1);
-        jPanel3.add(jTextField2);
+        jPanel7.setBackground(java.awt.Color.darkGray);
+        jPanel3.add(jPanel7);
+
+        jPanel6.setBackground(java.awt.Color.darkGray);
+        jPanel3.add(jPanel6);
         jPanel3.add(jTextField3);
-        jPanel3.add(jTextField4);
+
+        jPanel5.setBackground(java.awt.Color.darkGray);
+        jPanel3.add(jPanel5);
 
         jButton1.setBackground(java.awt.Color.white);
         jButton1.setText("Valider");
@@ -115,7 +120,7 @@ public class AjouterUtilisateurFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -127,21 +132,40 @@ public class AjouterUtilisateurFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String idUtilisateur="";
-        Boolean idOK=true;
-        GestionBDD serv=new GestionBDD();
-        try{
-            idUtilisateur=jTextField1.getText();
-        }catch(Exception e){
-            idOK=false;
-            e.printStackTrace();
-        }
-        if(idOK){
-            if(serv.ajouterUtilisateur(idUtilisateur,jTextField3.getText(), jTextField2.getText(), jTextField4.getText())){
-                this.setVisible(false);
-                new JFrameServeur().setVisible(true);
+        String idUtilisateur;
+        boolean idOK=true;
+        idUtilisateur=jTextField3.getText();
+
+        if(idOK){ 
+            try{
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException e) {
+                System.out.println(" Unable to load driver. ");
             }
-            jTextField1.setText("Id Utilisateur déjà utiliser");
+                String url= "jdbc:mysql://localhost:8889/mydb";
+                String username="root";
+                String passd ="root";
+            try {
+                Connection conn = DriverManager.getConnection(url, username, passd);
+                Statement state= conn.createStatement();
+                String idUtilisateurBis="'"+idUtilisateur+"'";
+                ResultSet result = state.executeQuery("SELECT * FROM utilisateur WHERE uti_id="+idUtilisateurBis+" LIMIT 1");
+                if(!result.next()){
+                    jTextField3.setText("Id utilisateur inexistant");
+                    idOK=false;
+                }
+                result.close();
+                state.close();
+                conn.close();
+            }catch(Exception e){
+                idOK=false;
+                jTextField3.setText("Erreur inconnu");
+                e.printStackTrace();
+            }
+            if(idOK){
+                this.setVisible(false);
+                new ModifierUtilisateurFrame2(idUtilisateur).setVisible(true);
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -191,9 +215,9 @@ public class AjouterUtilisateurFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }

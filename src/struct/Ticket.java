@@ -5,6 +5,7 @@
  */
 package struct;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 /**
@@ -13,8 +14,12 @@ import java.util.Date;
  */
 import java.util.List;
 
-public class Ticket {
+public class Ticket implements Serializable, Comparable<Ticket> {
 
+	/**
+	 * DEFAULT
+	 */
+	private static final long serialVersionUID = 1L;
 	private int idGroupe;
 	private String title;
 	private int id;
@@ -24,10 +29,8 @@ public class Ticket {
 	private boolean seen;
 
 	/**
-	public void setSeen(boolean seen) {
-		this.seen = seen;
-	}
 	 * Constructor to build new Ticket (Client side)
+	 * 
 	 * @param idGroupe
 	 * @param title
 	 * @param firstMess
@@ -100,20 +103,21 @@ public class Ticket {
 	public void setSeen(boolean seen) {
 		this.seen = seen;
 	}
-	
+
+	@Override
 	public int compareTo(Ticket tick) {
-		
-		if(this.id == tick.id) {
+
+		if (this.id == tick.id) {
 			return 0;
 		}
-		if(this.seen && !tick.seen) {
+		if (this.seen && !tick.seen) {
 			return 1;
 		}
-		if(!this.seen && tick.seen) {
+		if (!this.seen && tick.seen) {
 			return -1;
 		}
 		int compDate = this.dateLastMess.compareTo(tick.getDateLastMess());
-		if(compDate != 0) {
+		if (compDate != 0) {
 			return compDate;
 		}
 		return this.title.compareTo(tick.title);

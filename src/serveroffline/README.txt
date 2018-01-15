@@ -1,0 +1,13 @@
+######  Créer la base de donnée ######
+- Télécharger LAMP(pour Linux), MAMP(pour Mac) ou WAMP(pour Windows)
+- Une fois télécharger lancer le logiciel et cliquer sur Préférence
+- Aller dans l'onglet Web Server
+- Dans Documents Root sélectionner htdocs(en cliquant sur la flèche puis en sélectionnant le repertoire htdocs)
+- Ajouter dans htdocs le ficher adminer.php
+- Sur le logiciel cliquer maintenant sur Démarrer les serveurs
+- Normalement une page web devrait se lancer si ce n'est pas le cas cliquer sur Open WebStart page
+- Sur la page web cliquer sur l'onglet Mon Site Web et selectionner adminer.php
+- Entrer comme Utilisateur et Mot de passe root et appuyer sur entrer
+- Cliquer sur Créer une base de données appeler la mydb puis cliquer sur Enregistrer
+- Cliquer ensuite sur Importer puis sur Choisir les fichiers et selectionner le fichier BDProjet.sql
+- Cliquer sur Executer votre base de donnée dervait etre créer.

@@ -1,8 +1,10 @@
-package server;
+package serveroffline;
 
-import java.sql.DriverManager;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.Statement;
+
+import server.IGestionBDD;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,9 +24,9 @@ public class GestionBDD implements IGestionBDD {
 		} catch (ClassNotFoundException e) {
 			System.out.println(" Unable to load driver. ");
 		}
-                String url= "jdbc:mysql://localhost:8889/mydb";
-                String username="root";
-                String passd ="root";
+		String url = "jdbc:mysql://localhost:8889/mydb";
+		String username = "root";
+		String passd = "root";
 		try {
 			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
@@ -53,9 +55,9 @@ public class GestionBDD implements IGestionBDD {
 		} catch (ClassNotFoundException e) {
 			System.out.println(" Unable to load driver. ");
 		}
-                String url= "jdbc:mysql://localhost:8889/mydb";
-                String username="root";
-                String passd ="root";
+		String url = "jdbc:mysql://localhost:8889/mydb";
+		String username = "root";
+		String passd = "root";
 		try {
 			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
@@ -80,9 +82,9 @@ public class GestionBDD implements IGestionBDD {
 		} catch (ClassNotFoundException e) {
 			System.out.println(" Unable to load driver. ");
 		}
-                String url= "jdbc:mysql://localhost:8889/mydb";
-                String username="root";
-                String passd ="root";
+		String url = "jdbc:mysql://localhost:8889/mydb";
+		String username = "root";
+		String passd = "root";
 		try {
 			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
@@ -133,9 +135,9 @@ public class GestionBDD implements IGestionBDD {
 		} catch (ClassNotFoundException e) {
 			System.out.println(" Unable to load driver. ");
 		}
-                String url= "jdbc:mysql://localhost:8889/mydb";
-                String username="root";
-                String passd ="root";
+		String url = "jdbc:mysql://localhost:8889/mydb";
+		String username = "root";
+		String passd = "root";
 		try {
 			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
@@ -160,9 +162,9 @@ public class GestionBDD implements IGestionBDD {
 		} catch (ClassNotFoundException e) {
 			System.out.println(" Unable to load driver. ");
 		}
-                String url= "jdbc:mysql://localhost:8889/mydb";
-                String username="root";
-                String passd ="root";
+		String url = "jdbc:mysql://localhost:8889/mydb";
+		String username = "root";
+		String passd = "root";
 		try {
 			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
@@ -186,25 +188,26 @@ public class GestionBDD implements IGestionBDD {
 		}
 		return true;
 	}
-        @Override
-        public boolean reset(){
-                try {
+
+	@Override
+	public boolean reset() {
+		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			System.out.println(" Unable to load driver. ");
 		}
-                String url= "jdbc:mysql://localhost:8889/mydb";
-                String username="root";
-                String passd ="root";
+		String url = "jdbc:mysql://localhost:8889/mydb";
+		String username = "root";
+		String passd = "root";
 		try {
 			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
-                        state.executeUpdate("DELETE FROM utilisateur_has_unread_ticket ");
-                        state.executeUpdate("DELETE FROM utilisateur_has_groupe ");
-                        state.executeUpdate("DELETE FROM utilisateur ");
+			state.executeUpdate("DELETE FROM utilisateur_has_unread_ticket ");
+			state.executeUpdate("DELETE FROM utilisateur_has_groupe ");
+			state.executeUpdate("DELETE FROM utilisateur ");
 			state.executeUpdate("DELETE FROM message ");
-                        state.executeUpdate("DELETE FROM fil_de_discussion ");
-                        state.executeUpdate("DELETE FROM groupe ");
+			state.executeUpdate("DELETE FROM fil_de_discussion ");
+			state.executeUpdate("DELETE FROM groupe ");
 			state.close();
 			conn.close();
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e1) {
@@ -214,6 +217,6 @@ public class GestionBDD implements IGestionBDD {
 			e.printStackTrace();
 			return false;
 		}
-            return true;
-        }
+		return true;
+	}
 }

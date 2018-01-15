@@ -55,5 +55,7 @@ public interface IGestionBDD {
 	 * @return booléen indiquant si la modification a fonctionné
 	 * */
 	public boolean modifierUtilisateur(String idUtilisateur,String nom,String prenom,String password);
+	
+	boolean reset();
 }
 
