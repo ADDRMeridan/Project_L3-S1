@@ -1,3 +1,5 @@
+package server;
+
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.Statement;
@@ -20,10 +22,9 @@ public class GestionBDD implements IGestionBDD {
 		} catch (ClassNotFoundException e) {
 			System.out.println(" Unable to load driver. ");
 		}
- 		
-	String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-            String username = "sql11215552";
-            String passd = "HLaZ9P7drD";
+                String url= "jdbc:mysql://localhost:8889/mydb";
+                String username="root";
+                String passd ="root";
 		try {
 			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
@@ -52,9 +53,9 @@ public class GestionBDD implements IGestionBDD {
 		} catch (ClassNotFoundException e) {
 			System.out.println(" Unable to load driver. ");
 		}
-String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-            String username = "sql11215552";
-            String passd = "HLaZ9P7drD";
+                String url= "jdbc:mysql://localhost:8889/mydb";
+                String username="root";
+                String passd ="root";
 		try {
 			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
@@ -79,9 +80,9 @@ String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
 		} catch (ClassNotFoundException e) {
 			System.out.println(" Unable to load driver. ");
 		}
-String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-            String username = "sql11215552";
-            String passd = "HLaZ9P7drD";
+                String url= "jdbc:mysql://localhost:8889/mydb";
+                String username="root";
+                String passd ="root";
 		try {
 			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
@@ -132,9 +133,9 @@ String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
 		} catch (ClassNotFoundException e) {
 			System.out.println(" Unable to load driver. ");
 		}
-String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-            String username = "sql11215552";
-            String passd = "HLaZ9P7drD";
+                String url= "jdbc:mysql://localhost:8889/mydb";
+                String username="root";
+                String passd ="root";
 		try {
 			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
@@ -159,9 +160,9 @@ String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
 		} catch (ClassNotFoundException e) {
 			System.out.println(" Unable to load driver. ");
 		}
-String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-            String username = "sql11215552";
-            String passd = "HLaZ9P7drD";
+                String url= "jdbc:mysql://localhost:8889/mydb";
+                String username="root";
+                String passd ="root";
 		try {
 			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
@@ -192,9 +193,9 @@ String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
 		} catch (ClassNotFoundException e) {
 			System.out.println(" Unable to load driver. ");
 		}
-String url = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11215552";
-            String username = "sql11215552";
-            String passd = "HLaZ9P7drD";
+                String url= "jdbc:mysql://localhost:8889/mydb";
+                String username="root";
+                String passd ="root";
 		try {
 			Connection conn = DriverManager.getConnection(url, username, passd);
 			Statement state = conn.createStatement();
