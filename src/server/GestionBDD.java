@@ -35,6 +35,7 @@ public class GestionBDD implements IGestionBDD {
 			state.executeUpdate("INSERT INTO utilisateur(uti_id, uti_nom, uti_prenom, uti_password) VALUES ("
 					+ idUtilisateur + "," + nom + "," + prenom + "," + password + ");");
 			state.close();
+			conn.close();
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e1) {
 			System.out.println("idUtilisateur déjà utiliser !");
 			return false;
@@ -64,6 +65,7 @@ public class GestionBDD implements IGestionBDD {
 					"DELETE FROM utilisateur_has_unread_ticket WHERE utilisateur_uti_id=" + idUtilisateur + "");
 			state.executeUpdate("DELETE FROM utilisateur WHERE uti_id=" + idUtilisateur + "");
 			state.close();
+			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -87,6 +89,7 @@ public class GestionBDD implements IGestionBDD {
 			nom = "'" + nom + "'";
 			state.executeUpdate("INSERT INTO groupe (grp_id, grp_nom) VALUES (" + idGroupe + "," + nom + ");");
 			state.close();
+			conn.close();
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e1) {
 			System.out.println("idGroupe déjà utiliser !");
 			return false;
@@ -115,6 +118,7 @@ public class GestionBDD implements IGestionBDD {
 			state.executeUpdate("DELETE FROM utilisateur_has_groupe WHERE groupe_grp_id=" + idGroupe + "");
 			state.executeUpdate("DELETE FROM groupe WHERE grp_id=" + idGroupe + "");
 			state.close();
+			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -138,6 +142,7 @@ public class GestionBDD implements IGestionBDD {
 			state.executeUpdate("INSERT INTO utilisateur_has_groupe (utilisateur_uti_id, groupe_grp_id) VALUES ("
 					+ idUtilisateur + "," + idGroupe + ");");
 			state.close();
+			conn.close();
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e1) {
 			System.out.println("idGroupe et idUtilisateur déjà associer !");
 			return false;
@@ -171,6 +176,7 @@ public class GestionBDD implements IGestionBDD {
 			state.executeUpdate(
 					"UPDATE utilisateur SET uti_password= " + password + " WHERE uti_id=" + idUtilisateur + ";");
 			state.close();
+			conn.close();
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e1) {
 			System.out.println("idUtilisateur déjà utiliser !");
 			return false;
