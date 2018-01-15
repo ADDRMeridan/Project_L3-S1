@@ -178,7 +178,7 @@ public class ServNet extends Thread {
 		Ticket tick = null;
 		while (iter.hasNext() && notFound) {
 			tick = iter.next();
-			notFound = (tick.getId() == mess.getIdTicket());
+			notFound = (tick.getId() != mess.getIdTicket());
 		}
 		if (!notFound) {
 			int idMess = bdd.nextIdMsg(tick.getId(), tick.getIdGroupe());
