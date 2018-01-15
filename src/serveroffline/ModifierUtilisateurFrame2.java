@@ -18,18 +18,47 @@ import server.JFrameServeur;
  *
  * @author matthieulenoir
  */
-public class AjouterUtilisateurAGroupeFrame extends javax.swing.JFrame {
-
+public class ModifierUtilisateurFrame2 extends javax.swing.JFrame {
 	/**
 	 * DEFAULT
 	 */
 	private static final long serialVersionUID = 1L;
+	private String idUtilisateur;
 
 	/**
 	 * Creates new form AjouterUtilisateurFrame
+	 * 
+	 * @param idUtilisateur
+	 *            l'id de l'utilisateur à modifier
 	 */
-	public AjouterUtilisateurAGroupeFrame() {
+	public ModifierUtilisateurFrame2(String idUtilisateur) {
 		initComponents();
+		this.idUtilisateur = idUtilisateur;
+		jTextField1.setText("" + idUtilisateur + "");
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(" Unable to load driver. ");
+		}
+		String url = "jdbc:mysql://localhost:8889/mydb";
+		String username = "root";
+		String passd = "root";
+		try {
+			Connection conn = DriverManager.getConnection(url, username, passd);
+			Statement state = conn.createStatement();
+			idUtilisateur = "'" + idUtilisateur + "'";
+			ResultSet result = state
+					.executeQuery("SELECT * FROM utilisateur WHERE uti_id=" + idUtilisateur + " LIMIT 1");
+			result.next();
+			jTextField3.setText("" + result.getObject(2).toString() + "");
+			jTextField2.setText("" + result.getObject(3).toString() + "");
+			jTextField4.setText("" + result.getObject(4).toString() + "");
+			result.close();
+			state.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -41,6 +70,7 @@ public class AjouterUtilisateurAGroupeFrame extends javax.swing.JFrame {
 	// Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
+		jLabel5 = new javax.swing.JLabel();
 		jPanel1 = new javax.swing.JPanel();
 		jPanel2 = new javax.swing.JPanel();
 		jLabel2 = new javax.swing.JLabel();
@@ -50,29 +80,37 @@ public class AjouterUtilisateurAGroupeFrame extends javax.swing.JFrame {
 		jButton2 = new javax.swing.JButton();
 		jPanel3 = new javax.swing.JPanel();
 		jTextField1 = new javax.swing.JTextField();
-		jPanel6 = new javax.swing.JPanel();
+		jTextField2 = new javax.swing.JTextField();
 		jTextField3 = new javax.swing.JTextField();
-		jPanel5 = new javax.swing.JPanel();
+		jTextField4 = new javax.swing.JTextField();
 		jButton1 = new javax.swing.JButton();
 		jPanel4 = new javax.swing.JPanel();
+
+		jLabel5.setText("jLabel5");
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setBackground(new java.awt.Color(204, 204, 255));
 
-		jPanel1.setBackground(java.awt.Color.darkGray);
+		jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 		jPanel1.setLayout(new java.awt.GridLayout(1, 3));
 
 		jPanel2.setBackground(java.awt.Color.darkGray);
 		jPanel2.setLayout(new java.awt.GridLayout(5, 0));
 
 		jLabel2.setForeground(java.awt.Color.white);
-		jLabel2.setText("Id groupe:");
+		jLabel2.setText("Id utilisateur:");
 		jPanel2.add(jLabel2);
+
+		jLabel1.setForeground(java.awt.Color.white);
+		jLabel1.setText("Prenom: ");
 		jPanel2.add(jLabel1);
 
 		jLabel3.setForeground(java.awt.Color.white);
-		jLabel3.setText("Id utilisateur:");
+		jLabel3.setText("Nom:");
 		jPanel2.add(jLabel3);
+
+		jLabel4.setForeground(java.awt.Color.white);
+		jLabel4.setText("Mot de passe:");
 		jPanel2.add(jLabel4);
 
 		jButton2.setBackground(java.awt.Color.white);
@@ -90,13 +128,9 @@ public class AjouterUtilisateurAGroupeFrame extends javax.swing.JFrame {
 		jPanel3.setLayout(new java.awt.GridLayout(5, 0));
 
 		jPanel3.add(jTextField1);
-
-		jPanel6.setBackground(java.awt.Color.darkGray);
-		jPanel3.add(jPanel6);
+		jPanel3.add(jTextField2);
 		jPanel3.add(jTextField3);
-
-		jPanel5.setBackground(java.awt.Color.darkGray);
-		jPanel3.add(jPanel5);
+		jPanel3.add(jTextField4);
 
 		jButton1.setBackground(java.awt.Color.white);
 		jButton1.setText("Valider");
@@ -118,11 +152,11 @@ public class AjouterUtilisateurAGroupeFrame extends javax.swing.JFrame {
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 400, Short.MAX_VALUE)
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGap(0, 300, Short.MAX_VALUE)
-				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jPanel1,
-						javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE,
-						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 300, Short.MAX_VALUE)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
+								jPanel1, javax.swing.GroupLayout.Alignment.TRAILING,
+								javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)));
 
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
@@ -133,83 +167,11 @@ public class AjouterUtilisateurAGroupeFrame extends javax.swing.JFrame {
 	}// GEN-LAST:event_jButton2ActionPerformed
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
-		String idUtilisateur = "";
-		Boolean idOK = true;
 		GestionBDD serv = new GestionBDD();
-		try {
-			idUtilisateur = jTextField3.getText();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		if (idOK) {
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-			} catch (ClassNotFoundException e) {
-				System.out.println(" Unable to load driver. ");
-			}
-			String url = "jdbc:mysql://localhost:8889/mydb";
-			String username = "root";
-			String passd = "root";
-			try {
-				Connection conn = DriverManager.getConnection(url, username, passd);
-				Statement state = conn.createStatement();
-				idUtilisateur = "'" + idUtilisateur + "'";
-				ResultSet result = state.executeQuery("SELECT * FROM utilisateur WHERE uti_id=" + idUtilisateur + "");
-				if (!result.next()) {
-					jTextField3.setText("Id utilisateur inexistant");
-					idOK = false;
-				}
-				result.close();
-				state.close();
-				conn.close();
-			} catch (Exception e) {
-				idOK = false;
-				jTextField3.setText("Erreur inconnu");
-				e.printStackTrace();
-			}
-			if (idOK) {
-				int idGroupe = 0;
-				try {
-					idGroupe = Integer.parseInt(jTextField1.getText());
-				} catch (java.lang.NumberFormatException e) {
-					idOK = false;
-					jTextField1.setText("Id Groupe est un entier");
-				}
-				if (idOK) {
-					try {
-						Class.forName("com.mysql.jdbc.Driver");
-					} catch (ClassNotFoundException e) {
-						System.out.println(" Unable to load driver. ");
-					}
-					url = "jdbc:mysql://localhost:8889/mydb";
-					username = "root";
-					passd = "root";
-					try {
-						Connection conn = DriverManager.getConnection(url, username, passd);
-						Statement state = conn.createStatement();
-						ResultSet result = state.executeQuery("SELECT * FROM groupe WHERE grp_id=" + idGroupe + "");
-						if (!result.next()) {
-							jTextField1.setText("Id groupe inexistant");
-							idOK = false;
-						}
-						result.close();
-						state.close();
-						conn.close();
-					} catch (Exception e) {
-						idOK = false;
-						jTextField1.setText("Erreur inconnu");
-						e.printStackTrace();
-					}
-					if (idOK) {
-						if (serv.ajouterUtilisateurAGroupe(idGroupe, idUtilisateur)) {
-							this.setVisible(false);
-							new JFrameServeur().setVisible(true);
-						}
-						jTextField1.setText("idGroupe et idUtilisateur déjà associer");
-						jTextField3.setText("idGroupe et idUtilisateur déjà associer");
-					}
-				}
-			}
+		if (serv.modifierUtilisateur(idUtilisateur, jTextField3.getText(), jTextField2.getText(),
+				jTextField4.getText())) {
+			this.setVisible(false);
+			new JFrameServeur().setVisible(true);
 		}
 	}// GEN-LAST:event_jButton1ActionPerformed
 
@@ -263,13 +225,14 @@ public class AjouterUtilisateurAGroupeFrame extends javax.swing.JFrame {
 	private javax.swing.JLabel jLabel2;
 	private javax.swing.JLabel jLabel3;
 	private javax.swing.JLabel jLabel4;
+	private javax.swing.JLabel jLabel5;
 	private javax.swing.JPanel jPanel1;
 	private javax.swing.JPanel jPanel2;
 	private javax.swing.JPanel jPanel3;
 	private javax.swing.JPanel jPanel4;
-	private javax.swing.JPanel jPanel5;
-	private javax.swing.JPanel jPanel6;
 	private javax.swing.JTextField jTextField1;
+	private javax.swing.JTextField jTextField2;
 	private javax.swing.JTextField jTextField3;
+	private javax.swing.JTextField jTextField4;
 	// End of variables declaration//GEN-END:variables
 }
