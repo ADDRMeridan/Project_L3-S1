@@ -53,6 +53,7 @@ public class ModifierUtilisateurFrame2 extends javax.swing.JFrame {
 			jTextField4.setText("" + result.getObject(4).toString() + "");
 			result.close();
 			state.close();
+			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
