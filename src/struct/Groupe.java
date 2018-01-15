@@ -5,12 +5,19 @@
  */
 package struct;
 
+import java.io.Serializable;
+
 /**
  *
  * @author matthieulenoir
  */
-public class Groupe {
-    private int idGroupe;
+public class Groupe implements Serializable {
+    
+    /**
+	 * DEFAULT
+	 */
+	private static final long serialVersionUID = 1L;
+	private int idGroupe;
     private String nom;
 
     public Groupe(String nom,int idGroupe){

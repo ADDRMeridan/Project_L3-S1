@@ -11,10 +11,15 @@ package struct;
  * @author matthieulenoir
  */
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Message {
+public class Message implements Serializable {
 
+	/**
+	 * DEFAULT
+	 */
+	private static final long serialVersionUID = 1L;
 	private int idGroupe;
 	private int idTicket;
 	private int id;
