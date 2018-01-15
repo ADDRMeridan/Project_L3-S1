@@ -73,10 +73,12 @@ public class ClientUI_Tree extends javax.swing.JFrame {
 						Logger.getLogger(ClientUI_Tree.class.getName()).log(Level.SEVERE, null, ex);
 					}
 					StringBuilder strB = new StringBuilder();
+					strB.append("<html>");
 					for (Message mess : messList) {
-						strB.append("\n").append(formatDate(mess.gettWritten())).append(": ").append(mess.getMessage())
-								.append("\n");
+						strB.append("<br>").append(formatDate(mess.gettWritten())).append(": ").append(mess.getMessage())
+								.append("<br>");
 					}
+					strB.append("</html>");
 					messText.setText(strB.toString());
 				}
 			}
@@ -87,8 +89,7 @@ public class ClientUI_Tree extends javax.swing.JFrame {
 	private String formatDate(Date d) {
 
 		String tmp = "";
-		tmp = "[" + d.getDay() + "/" + d.getDate() + "/" + d.getYear() + "-" + d.getHours() + ":" + d.getMinutes()
-				+ "]";
+		tmp = "[" + d.getDay() + "/" + d.getDate() + "-" + d.getHours() + ":" + d.getMinutes() + "]";
 		return tmp;
 	}
 
