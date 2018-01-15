@@ -182,7 +182,7 @@ public class ServNet extends Thread {
 		}
 		if (!notFound) {
 			int idMess = bdd.nextIdMsg(tick.getId(), tick.getIdGroupe());
-			bdd.ajouterMsg(idMess, mess.getMessage(), mess.getIdTicket(), mess.getIdGroupe(), mess.gettWritten());
+			bdd.ajouterMsg(idMess, mess.getMessage(), tick.getId(), tick.getIdGroupe(), mess.gettWritten());
 			resetUserView(tick);
 			bdd.supprimerTicketNonLu(userId, tick.getId(), tick.getIdGroupe());
 			System.out.println("[T:" + Thread.currentThread().getId() + "] " + userId + " added a message to ticket " + tick.getId());
